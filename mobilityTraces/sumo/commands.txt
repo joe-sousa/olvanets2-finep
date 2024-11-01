@@ -1,0 +1,11 @@
+#adicionei um arquivo para limitar a velocidade a 60km/h
+#/usr/share/sumo/tools/randomTrips.py -n br116.net.xml -r br116.rou.xml -b 0 -e 1 -p 0.02    #gerar 50 carros em 1 segundo
+
+netconvert --osm-files map.osm --output-file manhattan.net.xml \
+ --geometry.remove --roundabouts.guess --ramps.guess \
+ --junctions.join --tls.guess-signals --tls.discard-simple --tls.join
+ 
+/usr/share/sumo/tools/randomTrips.py -n br116.net.xml --trip-attributes="type=\"myType\"" --additional-file type.add.xml --edge-permission passenger -r br116.rou.xml -b 0 -e 10 -p 0.0035
+ 
+
+ 

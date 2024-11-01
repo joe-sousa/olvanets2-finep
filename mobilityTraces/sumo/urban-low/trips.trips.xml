@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- generated on 2020-09-30 11:00:58.550057 by $Id$
+  options: -n manhattan_2km.net.xml <doubleminus>trip-attributes=type="myType" <doubleminus>additional-file type.add.xml <doubleminus>edge-permission passenger -r manhattan-low.rou.xml -b 0 -e 1 -p 0.01923
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <trip id="0" depart="0.00" from="588168464" to="626226775#1" type="myType"/>
+    <trip id="1" depart="0.02" from="194923807#9" to="-556075521" type="myType"/>
+    <trip id="2" depart="0.04" from="542096278#0" to="5671472" type="myType"/>
+    <trip id="3" depart="0.06" from="385668565#1" to="458177128#0" type="myType"/>
+    <trip id="4" depart="0.08" from="5671349#2" to="226040993#2" type="myType"/>
+    <trip id="5" depart="0.10" from="453367786#4" to="36806906#0" type="myType"/>
+    <trip id="6" depart="0.12" from="-420872204" to="447001271#2" type="myType"/>
+    <trip id="7" depart="0.13" from="420901679" to="46334597#0" type="myType"/>
+    <trip id="8" depart="0.15" from="619277989#0" to="456308943#1" type="myType"/>
+    <trip id="9" depart="0.17" from="420519634#0" to="458166892#1" type="myType"/>
+    <trip id="10" depart="0.19" from="483236728#8" to="483704511#1" type="myType"/>
+    <trip id="11" depart="0.21" from="-420872201#2" to="5671774#14" type="myType"/>
+    <trip id="12" depart="0.23" from="5671401#11" to="5672487#0" type="myType"/>
+    <trip id="13" depart="0.25" from="46139023#4" to="464683336" type="myType"/>
+    <trip id="14" depart="0.27" from="464683339#0" to="195743165#0" type="myType"/>
+    <trip id="15" depart="0.29" from="5670719#13" to="483236728#8" type="myType"/>
+    <trip id="16" depart="0.31" from="157014137#2" to="195743343#1" type="myType"/>
+    <trip id="17" depart="0.33" from="46469720#0" to="542257009#4" type="myType"/>
+    <trip id="18" depart="0.35" from="496983399#1" to="368938760#1" type="myType"/>
+    <trip id="19" depart="0.37" from="226040991#0" to="464683341#0" type="myType"/>
+    <trip id="20" depart="0.38" from="496982024#0" to="420872201#1" type="myType"/>
+    <trip id="21" depart="0.40" from="194923807#3" to="385668565#5" type="myType"/>
+    <trip id="22" depart="0.42" from="458166896#9" to="380096992#1" type="myType"/>
+    <trip id="23" depart="0.44" from="5670466" to="420499931#0" type="myType"/>
+    <trip id="24" depart="0.46" from="5672211#2" to="396444294#14" type="myType"/>
+    <trip id="25" depart="0.48" from="46490538#1" to="626226775#0" type="myType"/>
+    <trip id="26" depart="0.50" from="542096279#1" to="34080174#4" type="myType"/>
+    <trip id="27" depart="0.52" from="447001270" to="571651963" type="myType"/>
+    <trip id="28" depart="0.54" from="46334597#0" to="420872191" type="myType"/>
+    <trip id="29" depart="0.56" from="-5672190#2" to="-619277987#2" type="myType"/>
+    <trip id="30" depart="0.58" from="368938762#0" to="420872188#1" type="myType"/>
+    <trip id="31" depart="0.60" from="5671774#17" to="483236728#5" type="myType"/>
+    <trip id="32" depart="0.62" from="420499931#0" to="388240124#15" type="myType"/>
+    <trip id="33" depart="0.63" from="222299276#0" to="196117042#1" type="myType"/>
+    <trip id="34" depart="0.65" from="458166892#0" to="368938762#0" type="myType"/>
+    <trip id="35" depart="0.67" from="458177128#0" to="388240124#0" type="myType"/>
+    <trip id="36" depart="0.69" from="46469731#1" to="5671620#1" type="myType"/>
+    <trip id="37" depart="0.71" from="415849235#2" to="5671442#1" type="myType"/>
+    <trip id="38" depart="0.73" from="5671699#1" to="226040993#0" type="myType"/>
+    <trip id="39" depart="0.75" from="68668552#1" to="483236728#0" type="myType"/>
+    <trip id="40" depart="0.77" from="420872212" to="453367786#2" type="myType"/>
+    <trip id="41" depart="0.79" from="195743343#1" to="380147339" type="myType"/>
+    <trip id="42" depart="0.81" from="380099776" to="222299248#0" type="myType"/>
+    <trip id="43" depart="0.83" from="-465101198#1" to="46490538#6" type="myType"/>
+    <trip id="44" depart="0.85" from="496982024#0" to="496982024#0" type="myType"/>
+    <trip id="45" depart="0.87" from="489019752#4" to="194923808#8" type="myType"/>
+    <trip id="46" depart="0.88" from="573476360" to="619277989#2" type="myType"/>
+    <trip id="47" depart="0.90" from="222299248#0" to="453367786#1" type="myType"/>
+    <trip id="48" depart="0.92" from="5671693#0" to="458166896#0" type="myType"/>
+    <trip id="49" depart="0.94" from="194923807#0" to="458166893#0" type="myType"/>
+    <trip id="50" depart="0.96" from="68668541#0" to="458166896#3" type="myType"/>
+    <trip id="51" depart="0.98" from="5671349#0" to="420904660#1" type="myType"/>
+    <trip id="52" depart="1.00" from="458166897#2" to="46490538#5" type="myType"/>
+</routes>

@@ -1,0 +1,969 @@
+/*
+  Alisson Barbosa, Abril 2020.
+  Este código realiza a troca de pacotes entre veículos, simulando
+  o envio das subtarefas a serem executadas nos veículos substitutos e na borda da rede.
+ */
+
+#include "ns3/vector.h"
+#include "ns3/string.h"
+#include "ns3/socket.h"
+#include "ns3/double.h"
+#include "ns3/config.h"
+#include "ns3/log.h"
+#include "ns3/command-line.h"
+#include "ns3/mobility-model.h"
+#include "ns3/yans-wifi-helper.h"
+#include "ns3/position-allocator.h"
+#include "ns3/mobility-helper.h"
+#include "ns3/internet-stack-helper.h"
+#include "ns3/ipv4-address-helper.h"
+#include "ns3/ipv4-interface-container.h"
+#include "ns3/applications-module.h"
+#include "ns3/point-to-point-module.h"
+#include "ns3/internet-module.h"
+#include "ns3/ns2-mobility-helper.h"
+#include "ns3/netanim-module.h"
+#include "ns3/flow-monitor-module.h"
+#include "ns3/wall-clock-synchronizer.h"
+#include "ns3/ocb-wifi-mac.h"
+#include "ns3/wifi-80211p-helper.h"
+#include "ns3/wave-mac-helper.h"
+#include "ns3/wave-bsm-helper.h"
+#include "ns3/rng-seed-manager.h"
+#include "ns3/config-store.h"
+#include "ns3/mmwave-helper.h"
+#include "ns3/mmwave-point-to-point-epc-helper.h"
+#include "ns3/global-route-manager.h"
+
+#include <iostream>
+#include <unistd.h>
+
+using namespace ns3;
+using namespace mmwave;
+
+NS_LOG_COMPONENT_DEFINE ("olvanets");
+
+/*
+            Variáveis importantes
+ */
+
+// offloading
+#define GOOD_DISTANCE 150.0
+#define PI 3.14
+//#define numberOfSurrogates 2
+//#define packetSize     332450
+//#define numberOfNodes 1037
+uint32_t initAction;
+uint32_t clientId; //id do cliente
+std::ofstream os; //fluxo para o arquivo de log
+uint32_t numberOfNodes;
+uint32_t packetSize;
+std::string oneImage;
+int imgSize;
+double imgTime;
+double trange; //alcance de transmissão
+double sleepTime; // tempo de processamento
+double onlyLocalTime; //tempo a ser batido... unicamente local
+double localTime; //o local fica com algum processamento... esse é o tempo desse processamento
+uint32_t numberOfSurrogates;
+//#define packetSize     2288  //132KB é o tamanho máximo que o simulador aguenta
+//#define packetSize     140000
+//#define comEscolha true  // habilitar o algoritmo de escolha
+bool comEscolha; // habilitar o algoritmo de escolha
+double startTime; //tempo inicial da simulação
+double finishTime; //tempo final da simulação
+std::string tracePath; //caminho do trace de mobilidade
+std::string traceFile; //arquivo de trace de mobilidade
+std::string scenario; //urban ou highway
+std::string density; //low, medium ou high
+std::string cellcoverage; //tipo de cobertura das torres celulares 5G
+std::string logFile; //arquivo para gerar os logs
+FILE *fp; //arquivo dos resultados finais
+//Ptr<Node> auxProviders[4]; //array auxiliar para ajudar na ordenação dos providers
+std::map< Ptr<Node> , double> auxProviders; //map auxiliar para ajudar na ordenação dos providers; node / distância para o cliente
+typedef std::pair<Ptr<Node>,double> pair; //novo tipo para ajudar na ordenação dos providers; node / distância para o cliente
+std::vector <double> m_txSafetyRanges; //vetor de ranges usado para a aplicação BSM
+uint32_t run; //usado para ir pegando partes subsequentes da semente (seed)
+uint32_t numberOfEdgeServers; //número de servidores de borda e eNBs
+std::vector <double> enbXPositions; //posições no eixo X dos eNBs
+std::vector <double> enbYPositions; //posições no eixo Y dos eNBs
+Ipv4InterfaceContainer edgeIpIface;
+Ipv4InterfaceContainer clientIpIface;
+std::map < uint32_t ,Ipv4Address>	ipEdgeEnb; // map para associar um enb com seu SUE (super user equipment) (edge node)
+std::map < uint32_t ,uint32_t>	idEdgeEnb; // map para associar um enb com seu SUE (super user equipment) (edge node)
+Ptr<MmWaveHelper> ptr_mmWave;
+Ptr<MmWavePointToPointEpcHelper>  epcHelper;
+bool rcvdFirstServerReply = false;
+double timeOfFirstServerReply;
+double datarate = 4000000000.0; //1 Gbps
+Ptr<Socket> mmwReqUncSock; //socket da solicitação em unicast via mmwave
+Ptr<Socket> wReqBcSock; //socket da solicitação em broadcast via wave
+InternetStackHelper internet; //para instalar a pilha de internet tcp/ip
+NetDeviceContainer edgeNetDev; //container de interfaces mmWAVE dos edge servers
+NetDeviceContainer enbNetDev; //container de interfaces mmWAVE dos enbs
+NetDeviceContainer clientNetDevMmWave; //container de interfaces mmWAVE do carro cliente
+NetDeviceContainer devices; //container de interfaces WAVE dos carros
+
+//imagem: 66.49KB; tempo: 1.903s
+//tempo a ser batido: 30.448s
+//local, 6 imagens: 11.418s
+//2 subs, 5 imagens, 9.515s, 332.45KB
+
+/*
+                    Variváveis globais
+ */
+
+std::map < uint32_t ,uint32_t>   edgeNodeCPUBusy; //(id do edge node, porcentagem de uso da CPU do edge node)
+std::map < uint32_t ,uint32_t>   carNodeCPUBusy; //(id do carro, porcentagem de uso da CPU do carro)
+std::map < Ptr<Socket> ,uint32_t>	server_tcp_recv; // map para saber o quanto de dados o servidor recebeu de cada socket
+std::map < Ptr<Socket> ,uint32_t>	client_tcp_recv; // map para saber o quanto de dados o cliente recebeu de cada socket
+std::map < Ptr<Socket> ,uint32_t>	client_tcp_send; // map para saber o quanto de dados o cliente enviou para cada socket
+std::map < Ptr<Socket> ,uint32_t>	server_tcp_send; // map para saber o quanto de dados o servidor enviou para cada socket
+NodeContainer c; // Container principal dos carros
+NodeContainer edgeNodes; //container dos computadores de borda
+NodeContainer enbNodes; //container dos enbs
+NodeContainer surrogates; // Container dos surrogates
+NodeContainer clients; // Container para o cliente
+NodeContainer providers;
+NodeContainer bestProviders;
+Ipv4InterfaceContainer ips;
+uint32_t OffloadSuccess=0;
+//Cuidado com o tamanho desse armazenaIndexSurrogates!
+//@int armazenaIndexSurrogates[numberOfNodes];
+//std::vector<uint32_t> armazenaIndexSurrogates;
+bool KEY = true;
+bool alreadySent = false; //verifica se o cliente já fez o offloading uma vez
+double tempoIni;
+Ptr<Socket> client_side;
+Ptr<Socket> server_side;
+
+/*
+ * Teste feito apenas com 5G
+ *
+ * */
+
+void readLinesFromFile(std::string filename, std::string goal){
+	const char* fname = filename.c_str();
+	fp = fopen(fname, "r");  //arquivo com os dados de ocupação de CPU dos edge nodes
+	if(fp == NULL){
+		perror("Perdoe-nos, não conseguimos abrir o arquivo");
+		exit(1);
+	}
+	char *line = NULL;
+	size_t len = 0;
+	uint32_t numberOfLine = 0;
+	if(goal=="edgeCPU"){
+		while((getline(&line, &len, fp) != -1) && (numberOfLine < numberOfEdgeServers)){
+			edgeNodeCPUBusy[numberOfLine] = atoi(line); //line é o uso de CPU; numberOfLine é o ID do edgeNode
+			numberOfLine++;
+		}
+	}
+	if(goal=="carCPU"){
+		while((getline(&line, &len, fp) != -1) && (numberOfLine < numberOfNodes)){
+			carNodeCPUBusy[numberOfLine] = atoi(line); //line é o uso de CPU; numberOfLine é o ID do edgeNode
+			numberOfLine++;
+		}
+	}
+	if(goal=="enb-xpoints"){
+		while((getline(&line, &len, fp) != -1) && (numberOfLine < numberOfEdgeServers)){
+			enbXPositions.push_back(atof(line));
+			numberOfLine++;
+		}
+	}
+	if(goal=="enb-ypoints"){
+		while((getline(&line, &len, fp) != -1) && (numberOfLine < numberOfEdgeServers)){
+			enbYPositions.push_back(atof(line));
+			numberOfLine++;
+		}
+	}
+	fclose(fp);
+	free(line);
+}
+
+//função para enviar dados maiores que o buffer do socket TCP
+void ClientWriteUntilBufferFull (Ptr<Socket> localSocket, uint32_t txSpace)
+{
+	//while (client_tcp_send[localSocket] < packetSize && localSocket->GetTxAvailable () > 0)
+	if (client_tcp_send[localSocket] < packetSize && localSocket->GetTxAvailable () > 0)
+	{
+		uint32_t tcpsegment = 1500;
+		uint32_t left = packetSize - client_tcp_send[localSocket];
+		uint32_t toSend = std::min (left, localSocket->GetTxAvailable ());
+		toSend = std::min (toSend, tcpsegment);
+		Ptr<Packet> p = Create<Packet> (toSend);
+		//NS_LOG_DEBUG ("Source send data=\"" << GetString (p) << "\"");
+		int sent = localSocket->Send (p, 0);
+		//NS_TEST_EXPECT_MSG_EQ ((sent != -1), true, "Error during send ?");
+		if(sent < 0)
+		{
+			// we will be called again when new tx space becomes available.
+			return;
+		}
+		client_tcp_send[localSocket] += sent;
+	}
+	//else if (client_tcp_send[localSocket] >= packetSize ) {
+	if (client_tcp_send[localSocket] >= packetSize ) {
+		return;
+	}
+	Time tNext (Seconds (1400 * 8 / datarate));
+	Simulator::Schedule (tNext, &ClientWriteUntilBufferFull, localSocket, txSpace);
+
+
+	//if(tcp_send[localSocket] == packetSize) {
+	//	  tcp_send[localSocket] = 0; //zera depois de transmitir tudo
+	//}
+	//localSocket->Close ();
+}
+
+//função para enviar dados maiores que o buffer do socket TCP
+void ServerWriteUntilBufferFull (Ptr<Socket> localSocket, uint32_t txSpace)
+{
+	//while (server_tcp_send[localSocket] < packetSize && localSocket->GetTxAvailable () > 0)
+	if (server_tcp_send[localSocket] < packetSize && localSocket->GetTxAvailable () > 0)
+	{
+		uint32_t tcpsegment = 1500;
+		uint32_t left = packetSize - server_tcp_send[localSocket];
+		uint32_t toSend = std::min (left, localSocket->GetTxAvailable ());
+		toSend = std::min (toSend, tcpsegment);
+		Ptr<Packet> p = Create<Packet> (toSend);
+		//NS_LOG_DEBUG ("Source send data=\"" << GetString (p) << "\"");
+		int sent = localSocket->Send (p, 0);
+		//NS_TEST_EXPECT_MSG_EQ ((sent != -1), true, "Error during send ?");
+		if(sent < 0)
+		{
+			// we will be called again when new tx space becomes available.
+			return;
+		}
+		server_tcp_send[localSocket] += sent;
+	}
+	if(server_tcp_send[localSocket] == packetSize) {
+	//if(server_tcp_send[localSocket] >= packetSize) { //temporário
+		//	  tcp_send[localSocket] = 0; //zera depois de transmitir tudo
+
+		//localSocket->Close ();
+		return;
+	}
+	Time tNext (Seconds (1400 * 8 / datarate));
+	Simulator::Schedule (tNext, &ServerWriteUntilBufferFull, localSocket, txSpace);
+}
+
+//begin implementation of sending "Application"
+void StartFlow (Ptr<Socket> localSocket, Ipv4Address servAddress, uint16_t servPort, std::string upOrDownload) {
+  //NS_LOG_LOGIC ("Starting flow at time " <<  Simulator::Now ().GetSeconds ());
+  //localSocket->Connect (InetSocketAddress (servAddress, servPort)); //connect
+
+  // tell the tcp implementation to call WriteUntilBufferFull again
+  // if we blocked and new tx buffer space becomes available
+  if(upOrDownload == "upload"){
+	  localSocket->SetSendCallback (MakeCallback (&ClientWriteUntilBufferFull));
+	  ClientWriteUntilBufferFull (localSocket, localSocket->GetTxAvailable ());
+  } else if(upOrDownload == "download"){
+	  localSocket->SetSendCallback (MakeCallback (&ServerWriteUntilBufferFull));
+	  ServerWriteUntilBufferFull (localSocket, localSocket->GetTxAvailable ());
+  }
+}
+
+//Envia os resultados para o cliente depois de fazer o processamento
+void serverSendAfter(Ptr<Socket> socket, Ipv4Address ipv4From, uint16_t portFrom) {
+	std::cout << "[SERVIDOR] Enviando as tarefas..." << std::endl;
+	//@socket->Send(Create<Packet> (packetSize),0);
+	StartFlow(socket,ipv4From, portFrom,"download");
+	//socket->Close();
+}
+
+//Recebe os dados do cliente, processa (depois de sleepTime) e chama SendAfter para enviar os resultados
+void serverHandler(Ptr<Socket> socket) {
+	while(socket->GetRxAvailable() > 0){
+		Address from;
+		Ptr<Packet> pack2 = socket->RecvFrom (from);
+		//std::cout << "[SERVIDOR] Pacote recebido " << std::endl;
+		uint32_t packet2 = pack2->GetSize();
+		server_tcp_recv[socket] += packet2;  //@TODO: garantir para zerar depois esse map
+		Ipv4Address ipv4From = InetSocketAddress::ConvertFrom(from).GetIpv4();  //ipv4 do cliente
+		uint16_t portFrom = InetSocketAddress::ConvertFrom(from).GetPort();; //porta do cliente
+
+		if (server_tcp_recv[socket]>=packetSize) {
+			std::cout << "[SERVIDOR] Tarefa recebida\n";
+			std::cout << "[SERVIDOR] Processando..." << std::endl;
+			std::cerr << "[DEBUG] Tempo antes de processar => "<< Simulator::Now().GetSeconds () << std::endl;
+			Simulator::Schedule(Seconds(sleepTime/sleepTime),&serverSendAfter,socket, ipv4From, portFrom); //processa (num tempo sleepTime) e chama o sendAfter p enviar os resultados
+		}
+	}
+
+}
+
+// Aceita a conexão
+void serverAccept(Ptr<Socket> socket,const ns3::Address& from)
+{
+	std::cout<<"[SERVIDOR] Conexão aceita"<< std::endl;
+	socket->SetRecvCallback (MakeCallback (&serverHandler));
+}
+
+//Cria o socket servidor e coloca-o para escutar e depois responder
+void serverSide(uint32_t iface) {
+	TypeId tid = TypeId::LookupByName ("ns3::TcpSocketFactory");
+	for(uint32_t index = 0; index < providers.GetN(); index++){ //cria um socket TCP para cada provider
+		InetSocketAddress listen = InetSocketAddress (Ipv4Address::GetAny (), 55555);
+		std::cout << "[SERVIDOR] Servidor " << index << " ativo!" << std::endl;
+		//server_side = Socket::CreateSocket(edgeNodes.Get(0),tid);
+		server_side = Socket::CreateSocket(providers.Get(index),tid);
+		if(iface == 1){
+			Ptr<NetDevice> edgeNetDevCell = edgeNetDev.Get(index); //interface 5G do cliente
+			server_side->BindToNetDevice (edgeNetDevCell); //garante que este socket esteja atrelado à interface 5G do cliente
+		}
+		if(iface == 2){
+			Ptr<NetDevice> carNetDevWave = devices.Get(index);
+			server_side->BindToNetDevice (carNetDevWave);
+		}
+		server_side->Bind(listen);
+		server_side->Listen();
+		server_side->SetAcceptCallback (MakeNullCallback<bool, Ptr<Socket>,const Address &> (),MakeCallback(&serverAccept));
+	}
+}
+
+//recebe resultados dos offloadings e imprime no arquivo de resultados
+void clientHandler(Ptr<Socket> socket) {
+	//FILE *fp = fopen("/tmp/results", "a+");  //arquivo com resultados   "results/resultados.tr"
+	//@FILE *fp = fopen("results/results.tr", "a+");  //arquivo com resultados
+	while(socket->GetRxAvailable() > 0){
+		Address from;
+		Ptr<Packet> pack = socket->RecvFrom (from);
+		//std::cout << "[CLIENTE] Pacote recebido " << std::endl;
+		uint32_t packet = pack->GetSize();
+		client_tcp_recv[socket] += packet;
+
+		if (client_tcp_recv[socket]>=packetSize) {
+			std::cout << "[CLIENTE] Resultados recebidos!\n";
+			std::cerr << "[DEBUG] Tempo depois do processamento => "<< Simulator::Now().GetSeconds () << std::endl;
+		}
+	}
+}
+
+// Função para receber solicitações dos clientes e responder
+void serverListenForRequests(Ptr<Socket> socket) {
+	//@TODO: O que prova que recebeu pacote?
+	Address from;
+	Ptr<Packet> packet= socket->RecvFrom(from);
+	Ipv4Address ipv4From = InetSocketAddress::ConvertFrom(from).GetIpv4();
+	//UdpHeader udpHeader;
+	//packet->RemoveHeader(udpHeader);
+	//uint16_t udpPort = udpHeader.GetDestinationPort();
+
+	uint8_t *buff = new uint8_t[packet->GetSize()];
+	packet->CopyData(buff,packet->GetSize());
+	std::string data = std::string((char*)buff);
+
+	std::cout << "[SERVIDOR] Mensagem recebida: "<< data << " em "<< Simulator::Now().GetSeconds () << " segundos" << std::endl;
+	std::cout << "[SERVIDOR] Solicitação recebida de: "<< ipv4From << std::endl;
+	std::cout << "[SERVIDOR] Enviando a resposta..." << std::endl;
+	InetSocketAddress dst = InetSocketAddress(ipv4From,80);
+	socket->Connect(dst);
+	//socket->Send(Create<Packet> (60)); //envia uma resposta
+	socket->SendTo (Create<Packet> (60), 0, dst);
+	socket->Close();
+}
+
+void clientSide(uint32_t iface) {
+
+	TypeId tid = TypeId::LookupByName ("ns3::TcpSocketFactory");
+	for(uint32_t index = 0; index < providers.GetN(); index++){ //cria um socket TCP para cada um dos providers
+		std::cerr << "[DEBUG] Iniciando conexão com ==> "<< index << std::endl;
+		client_side = Socket::CreateSocket(clients.Get(0),tid);
+
+		//Ipv4Address serverIP = edgeIpIface.GetAddress(0);
+		//Ipv4Address serverIP = providers.Get(index)->GetObject<Ipv4>()->GetAddress(1, 0).GetLocal();
+		Ipv4Address serverIP = providers.Get(index)->GetObject<Ipv4>()->GetAddress(iface, 0).GetLocal();
+		if(iface == 1){
+			Ptr<NetDevice> clientNetDevCell = clientNetDevMmWave.Get(0); //interface 5G do cliente
+			client_side->BindToNetDevice (clientNetDevCell); //garante que este socket esteja atrelado à interface 5G do cliente
+		}
+		if(iface == 2){
+			Ptr<NetDevice> clientNetDevWave = devices.Get(clientId); //interface WAVE do cliente
+			client_side->BindToNetDevice (clientNetDevWave); //garante que este socket esteja atrelado à interface WAVE do cliente
+		}
+		InetSocketAddress end = InetSocketAddress (serverIP, 55555);
+		uint32_t status = client_side->Connect(end);
+		std::cout << "[SISTEMA] Status da conexão ==> "<< status << std::endl;
+
+		std::cout << "[CLIENTE] Enviando tarefas..." << std::endl;
+		std::cerr << "Nó:" << "[DEBUG] Tempo antes de enviar => "<< Simulator::Now().GetSeconds() << std::endl;
+		StartFlow(client_side,serverIP, 55555,"upload");
+		//@client_side->Send(Create<Packet> (packetSize),0); // Envia o pedaco da matriz
+		//client_side->Bind(end);
+		client_side->SetRecvCallback(MakeCallback(&clientHandler)); //espera para receber o resultado
+	}
+}
+
+// Cliente faz solicitação
+void clientRequest(Ptr<Socket> socket) {
+	std::cout << "[CLIENTE] Enviando solicitação em "<< Simulator::Now().GetSeconds () << " segundos" << std::endl;
+	//std::cerr << "[DEBUG] => "<< Simulator::Now().GetSeconds () << std::endl;
+	std::stringstream msgx;
+	msgx << "Alo, Alisson";
+	Ptr<Packet> pkt = Create<Packet>((uint8_t*) msgx.str().c_str(), 256);
+	socket->Send(pkt); //envia pacote pelo socket
+}
+
+// Recebe os pacotes de resposta e faz a escolha dos substitutos
+void clientRecRepPkt(Ptr<Socket> socket) {
+	Ipv4Address ipv4From;
+	Ipv4Address ipv4To; //endereço do nó atual (na interface atual) que está recebendo
+	uint32_t iface = 0; //interface do socket (mmwave ou wave)
+	if(socket != NULL){
+		Address from;
+		Ptr<Packet> packet= socket->RecvFrom(from);
+		ipv4From = InetSocketAddress::ConvertFrom(from).GetIpv4();
+		std::cout << "[CLIENTE] Recebeu resposta de ==> "<< ipv4From << " em " << Simulator::Now().GetSeconds () << " segundos" << std::endl;
+
+		Ptr<Node> curNode = socket->GetNode(); //nó atual deste socket
+
+		Ptr<NetDevice> curDevice = socket->GetBoundNetDevice(); //interface de rede deste socket (se wave ou 5g)
+		TypeId tid1 = curDevice->GetInstanceTypeId();
+		std::string tidName = tid1.GetName(); //pega o nome da interface de rede
+
+		//preenche um vetor com a sequência correta de interfaces de rede do nó
+		/*for(uint32_t z=0; z < curNode->GetNDevices(); z++){
+			Ptr<NetDevice> curDvc = curNode->GetDevice(z);
+			TypeId tid2 = curDvc->GetInstanceTypeId();
+			std::string tidName2 = tid2.GetName(); //pega o nome da interface de rede
+			if(tidName == tidName2) {  //associar posição da interface no nó com a interface do socket
+				iface = z;
+				break;
+			}
+		}*/
+
+		if(tidName == "ns3::MmWaveUeNetDevice"){
+			iface = 1;
+		}
+		if(tidName == "ns3::WifiNetDevice"){
+			iface = 2;
+		}
+
+		ipv4To = curNode->GetObject<Ipv4>()->GetAddress (iface, 0).GetLocal();
+
+		//Ipv4Header ipv4header;
+		//packet->RemoveHeader(ipv4header);
+		//Ipv4Address ipv4To = ipv4header.GetDestination();
+		std::cout << "[CLIENTE] Recebeu resposta para ==> "<< ipv4To << std::endl;
+
+		if(!rcvdFirstServerReply)
+		{
+			timeOfFirstServerReply = Simulator::Now().GetSeconds();
+			rcvdFirstServerReply = true;
+		}
+	}
+	double currentTime = Simulator::Now().GetSeconds();
+	double waitForReplies = 0.05; //tempo de espera pelas respostas dos servidores - podemos variar de 0.03 a 0.05
+
+	if(((currentTime - rcvdFirstServerReply) < waitForReplies) && (socket != NULL)){
+		/*for (size_t i = 0; i < c.GetN(); i++) { //@TODO: como sei que o surrogates tem alguma coisa?
+			if (ipv4From == c.Get(i)->GetObject<Ipv4>()->GetAddress (1, 0).GetLocal()){ //se o surrogate escolhido respondeu
+				std::cerr << "[DEBUG] O índice do server é => "<< i << std::endl;
+				std::cerr << "[DEBUG] Índice: "<< i << std::endl;
+				providers.Add(c.Get(i));       //vai adicionando da interface WAVE
+			}
+		}*/
+		for (size_t i = 0; i < edgeNodes.GetN(); i++) { //@TODO: como sei que o surrogates tem alguma coisa?
+			if (ipv4From == edgeNodes.Get(i)->GetObject<Ipv4>()->GetAddress (1, 0).GetLocal()){ //se o surrogate escolhido respondeu
+				std::cerr << "[DEBUG] O índice do server é => "<< i << std::endl;
+				std::cerr << "[DEBUG] Índice: "<< i << std::endl;
+				providers.Add(edgeNodes.Get(i));     //vai adicionando da interface 5G
+			}
+		}
+	}
+	/*else {
+		//envia para todos os providers
+		for(uint32_t j = 0; j < providers.GetN(); j++){
+			Simulator::Schedule(Seconds(0.0),serverSide,j,iface);
+			Simulator::Schedule(Seconds(0.0),clientSide,j,iface);
+		}
+
+	}*/
+	if(!alreadySent){
+		alreadySent = true;
+		//Simulator::Schedule(Seconds(0.05),clientRecRepPkt,nullptr, iface);
+		Simulator::Schedule(Seconds(0.05),serverSide,iface);
+		Simulator::Schedule(Seconds(0.05),clientSide,iface);
+	}
+}
+
+void initializeWave () {
+	//Camadas de Enlace e Física WAVE
+	YansWifiPhyHelper wifiPhy =  YansWifiPhyHelper::Default (); //camada física
+	YansWifiChannelHelper wifiChannel; //canal da camada física
+	wifiChannel.SetPropagationDelay ("ns3::ConstantSpeedPropagationDelayModel"); //atraso de propagação do canal
+	//wifiChannel.AddPropagationLoss ("ns3::NakagamiPropagationLossModel");
+	//wifiChannel.AddPropagationLoss("ns3::RangePropagationLossModel", "MaxRange",DoubleValue(600));
+	wifiChannel.AddPropagationLoss ("ns3::TwoRayGroundPropagationLossModel", //modelo de rádio propagação
+			"Frequency", DoubleValue (5.9e9),
+			"HeightAboveZ", DoubleValue (1.5));
+
+	std::string phyMode ("OfdmRate27MbpsBW10MHz"); //padrão do WAVE é 6Mbps
+	wifiPhy.Set ("TxGain", DoubleValue(2.0) );
+	wifiPhy.Set ("RxGain", DoubleValue (2.0) );
+	wifiPhy.Set ("TxPowerLevels", UintegerValue(1));
+	wifiPhy.Set("EnergyDetectionThreshold",DoubleValue(-95.0));
+	//trange = 251.0;
+	//ConfigureTransmissionRangeTRG(trange); //configura a camada física para garantir o alcance
+	wifiPhy.Set ("TxPowerStart", DoubleValue(16.7));
+	wifiPhy.Set ("TxPowerEnd", DoubleValue(16.7));
+	wifiPhy.SetChannel (wifiChannel.Create ()); //seta o canal configurado na camada física
+	wifiPhy.SetPcapDataLinkType (YansWifiPhyHelper::DLT_IEEE802_11); // suporte para gerar um trace pcap
+
+	NqosWaveMacHelper wifi80211pMac = NqosWaveMacHelper::Default (); //camada de enlace 802.11p com QoS
+	Wifi80211pHelper wifi80211p = Wifi80211pHelper::Default (); //helper da camada de enlace 802.11p com QoS
+	wifi80211p.SetRemoteStationManager ("ns3::ConstantRateWifiManager",   //usa a mesma taxa de dados para cada pacote
+			"DataMode",StringValue (phyMode), //configura o modo de dados
+			"ControlMode",StringValue (phyMode)); //configura o modo de controle
+	devices = wifi80211p.Install (wifiPhy, wifi80211pMac, c); //instala a camada física e enlace nas placas de redes dos nós
+
+	Ipv4AddressHelper ipv4; // serviço de DHCP
+	NS_LOG_INFO ("Atribuindo endereços IP.");
+	ipv4.SetBase ("10.1.0.0", "255.255.0.0"); //Seta o número base da rede, máscara e endereço
+	ips = ipv4.Assign (devices); //atribui os IPs nas placas de rede dos nós
+	std::cout << "[SISTEMA] IP-WAVE do cliente ==> "<< ips.GetAddress(clientId) << std::endl;
+
+	//broadcast para descoberta em WAVE
+	TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory"); //pega o tipo da API para criar instâncias de sockets UDP
+	wReqBcSock = Socket::CreateSocket (c.Get (clientId), tid); //cria socket UDP do cliente para o broadcast
+	Ptr<NetDevice> clientNetDevWave = devices.Get(clientId); //interface WAVE do cliente
+	wReqBcSock->BindToNetDevice (clientNetDevWave); //garante que este socket esteja atrelado à interface WAVE do cliente
+	InetSocketAddress port = InetSocketAddress (Ipv4Address::GetAny (), 80); //usado para receber as respostas das solicitações em broadcast
+	InetSocketAddress broadcast = InetSocketAddress (Ipv4Address("255.255.255.255"), 80); //usado para enviar as solicitações em broadcast
+	wReqBcSock->SetAllowBroadcast(true); //configura se transmissões de datagramas broadcast são permitidos
+	wReqBcSock->Connect (broadcast); //Inicia uma conexão com o hospedeiro remoto (broadcast)
+	wReqBcSock->Bind(port); //Aloca um endpoint para este socket para escutar respostas das solicitações em broadcast
+	wReqBcSock->SetRecvCallback(MakeCallback(&clientRecRepPkt)); //Notifica quando novos dados estão disponíveis, recebe respostas
+
+	//p servidor do carro receber solicitações em broadcast e responder
+	InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80); //usado para escutar solicitações do cliente
+	for (uint32_t x = 0; x < c.GetN(); x++) {
+		if (x != clientId) { //que o substituto não seja o próprio cliente
+			surrogates.Add(c.Get(x)); //adiciona todos os nós restantes no container de substitutos
+			//@armazenaIndexSurrogates[x] = x; //armazena o índice dos substitutos
+			Ptr<Socket> wSinkServer = Socket::CreateSocket (c.Get (x), tid); //cria socket UDP nos substitutos para escutar solicitações do cliente
+			Ptr<NetDevice> carNetDevWave = devices.Get(x);
+			wSinkServer->BindToNetDevice (carNetDevWave);
+			wSinkServer->Bind(local); //aloca um endpoint para este socket para escutar solicitações do cliente
+			wSinkServer->SetRecvCallback(MakeCallback(&serverListenForRequests)); //recebe solicitações e responde para o cliente
+		}
+	}
+}
+
+void initializeMmWave () {
+	//configurações do mmwave
+	Config::SetDefault ("ns3::LteRlcUm::MaxTxBufferSize", UintegerValue (1024 * 1024));
+	Config::SetDefault ("ns3::MmWavePhyMacCommon::ResourceBlockNum", UintegerValue(1));
+	Config::SetDefault ("ns3::MmWavePhyMacCommon::ChunkPerRB", UintegerValue(72));
+	bool rlcAmEnabled = true;
+	Config::SetDefault ("ns3::LteRlcUmLowLat::MaxTxBufferSize", UintegerValue (1024 * 1024));
+	Config::SetDefault ("ns3::MmWaveHelper::RlcAmEnabled", BooleanValue(rlcAmEnabled));
+	Config::SetDefault ("ns3::LteRlcAm::PollRetransmitTimer", TimeValue(MilliSeconds(0.4)));
+	Config::SetDefault ("ns3::LteRlcAm::StatusProhibitTimer", TimeValue(MilliSeconds(1.0)));
+	Config::SetDefault ("ns3::MmWavePhyMacCommon::TbDecodeLatency", UintegerValue(2.0));
+	Config::SetDefault ("ns3::MmWavePointToPointEpcHelper::S1uLinkDelay", TimeValue (Seconds(0)));
+	Config::SetDefault ("ns3::MmWavePointToPointEpcHelper::S1apLinkDelay", TimeValue (Seconds(0)));
+	Config::SetDefault ("ns3::MmWaveFlexTtiMacScheduler::CqiTimerThreshold", UintegerValue(100000));
+	//Config::SetDefault ("ns3::MmWavePropagationLossModel::ChannelStates", StringValue ("n"));
+	Config::SetDefault ("ns3::MmWavePropagationLossModel::FixedLossTst", BooleanValue (false));
+	Config::SetDefault ("ns3::MmWavePropagationLossModel::LossFixedDb", DoubleValue (100.0));
+
+	//outras configurações
+	Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue (1500)); // seta o tamanho do segmento TCP
+	Config::SetDefault ("ns3::TcpSocket::TcpNoDelay", BooleanValue (true));
+	Config::SetDefault ("ns3::TcpSocket::DelAckCount", UintegerValue (0));
+	Config::SetDefault ("ns3::TcpSocket::SndBufSize", UintegerValue (131072*50));
+	Config::SetDefault ("ns3::TcpSocket::RcvBufSize", UintegerValue (131072*50));
+
+	//configurando periodicidade das mensagens 5G
+	//Config::SetDefault ("ns3::MmWavePhyMacCommon::SubframePeriod", DoubleValue(10000000.0));
+	//Config::SetDefault ("ns3::MmWaveBeamforming::LongTermUpdatePeriod", TimeValue (Seconds (2.0)));
+	Config::SetDefault ("ns3::MmWaveEnbPhy::UpdateSinrEstimatePeriod", IntegerValue (25600));
+	//Config::SetDefault ("ns3::MmWaveUeMac::UpdateUeSinrEstimatePeriod", DoubleValue (0));
+
+	ConfigStore inputConfig;
+	inputConfig.ConfigureDefaults();
+
+	//cria os helpers do mmwave
+	ptr_mmWave = CreateObject<MmWaveHelper> ();
+	ptr_mmWave->SetSchedulerType ("ns3::MmWaveFlexTtiMacScheduler");
+	epcHelper = CreateObject<MmWavePointToPointEpcHelper> ();
+	ptr_mmWave->SetEpcHelper (epcHelper);
+
+	/*Ptr<Node> pgw = epcHelper->GetPgwNode ();
+	MobilityHelper pgwmobility;
+	Ptr<ListPositionAllocator> pgwPositionAlloc = CreateObject<ListPositionAllocator> ();
+	pgwPositionAlloc->Add (Vector (1000.0, 1000.0, 0.0));
+	pgwmobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+	pgwmobility.SetPositionAllocator(pgwPositionAlloc);
+	pgwmobility.Install (pgw);*/
+
+	//instala o mmwave nos nós
+	edgeNetDev = ptr_mmWave->InstallUeDevice (edgeNodes);
+	enbNetDev = ptr_mmWave->InstallEnbDevice (enbNodes);
+	clientNetDevMmWave = ptr_mmWave->InstallUeDevice (clients);
+
+	//instala a pilha da internet nos EUs que agem como servidores de borda
+	internet.Install (edgeNodes);
+	edgeIpIface = epcHelper->AssignUeIpv4Address (NetDeviceContainer (edgeNetDev));
+
+	internet.Install (c); //instala a pilha de internet nos carros -- não pode ser acionado sem ter placa de rede instalada
+	//atribuição de IP na interface 5G do cliente
+	clientIpIface = epcHelper->AssignUeIpv4Address (NetDeviceContainer (clientNetDevMmWave));
+	std::cout << "[SISTEMA] IP-mmWAVE do cliente ==> "<< clientIpIface.GetAddress(0) << std::endl;
+
+	Ipv4StaticRoutingHelper ipv4RoutingHelper;
+	// Set the default gateway for the SUEs (edge nodes) and associate with your eNB
+	for(uint32_t i=0; i<edgeNodes.GetN(); i++){
+		Ptr<Node> edgeNode = edgeNodes.Get (i);
+		Ptr<Ipv4StaticRouting> edgeNodeStaticRouting = ipv4RoutingHelper.GetStaticRouting (edgeNode->GetObject<Ipv4> ());
+		edgeNodeStaticRouting->SetDefaultRoute (epcHelper->GetUeDefaultGatewayAddress (), 1);
+
+		uint32_t idEnb = enbNodes.Get(i)->GetId();
+		uint32_t idEdgeNode = edgeNode->GetId();
+		ipEdgeEnb[idEnb] = edgeIpIface.GetAddress (i);
+		//ipEdgeEnb[idEnb] = edgeNode->GetObject<Ipv4>()->GetAddress (1, 0).GetLocal();
+		idEdgeEnb[idEnb] = idEdgeNode;
+	}
+
+	// Set the default gateway for the o carro cliente
+	Ptr<Node> clientNode = clients.Get (0);
+	Ptr<Ipv4StaticRouting> clientStaticRouting = ipv4RoutingHelper.GetStaticRouting (clientNode->GetObject<Ipv4> ());
+	clientStaticRouting->SetDefaultRoute (epcHelper->GetUeDefaultGatewayAddress (), 1);
+
+	//liga os equipamentos 5G ao eNB mais próximo
+	ptr_mmWave->AttachToClosestEnb (edgeNetDev, enbNetDev);
+	ptr_mmWave->AttachToClosestEnb (clientNetDevMmWave, enbNetDev);
+	ptr_mmWave->EnableTraces();
+
+	//como pegar o enb associado ao carro cliente
+	Ptr<MmWaveUeNetDevice> teste = clientNetDevMmWave.Get(0)->GetObject<MmWaveUeNetDevice>();
+	Ptr<MmWaveEnbNetDevice> targetEnb = teste->GetTargetEnb();
+	uint32_t idTargetEnb = targetEnb->GetNode()->GetId();
+	std::cerr << "[SISTEMA] ID do eNB associado ==> " << idTargetEnb << " Tempo: ==> "<< Simulator::Now().GetSeconds() << std::endl;
+
+	TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory"); //pega o tipo da API para criar instâncias de sockets UDP
+	//hello em unicast para o eNB
+	mmwReqUncSock = Socket::CreateSocket (clients.Get (0), tid);
+	InetSocketAddress port = InetSocketAddress (Ipv4Address::GetAny (), 80); //usado para receber as respostas das solicitações em broadcast
+	Ptr<NetDevice> clientNetDevCell = clientNetDevMmWave.Get(0); //interface 5G do cliente
+	mmwReqUncSock->BindToNetDevice (clientNetDevCell); //garante que este socket esteja atrelado à interface 5G do cliente
+	InetSocketAddress remoteEdge = InetSocketAddress (ipEdgeEnb[idTargetEnb], 80);
+	mmwReqUncSock->Connect (remoteEdge);
+	mmwReqUncSock->Bind(port);
+	mmwReqUncSock->SetRecvCallback (MakeCallback (&clientRecRepPkt));
+
+	InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80); //usado para escutar solicitações do cliente
+	//p servidores da edge receberem solicitações em unicast e responder
+	for (uint32_t y = 0; y < edgeNodes.GetN(); y++) {
+		Ptr<Socket> mmwSinkEdge = Socket::CreateSocket (edgeNodes.Get (y), tid); //cria socket UDP nos edgeNodes para escutar solicitações do cliente
+		Ptr<NetDevice> edgeNetDevCell = edgeNetDev.Get(y);
+		mmwSinkEdge->BindToNetDevice (edgeNetDevCell);
+		mmwSinkEdge->Bind(local); //aloca um endpoint para este socket para escutar solicitações do cliente
+		mmwSinkEdge->SetRecvCallback(MakeCallback(&serverListenForRequests)); //recebe solicitações e responde para o cliente
+	}
+}
+
+std::vector<double> clientPosition () {
+	std::ifstream infile(tracePath + traceFile, std::ios::in);
+	if(!infile)
+	{
+	    std::cerr<<"File could not be opend"<<std::endl;
+	}
+	// I have eight different variables, representing each column, but some lines have less columns.
+	std::string a; std::string b; std::string e; std::string h;
+	std::string c; //terceira coluna: tempo
+	std::string d; //quarta coluna: node
+	double f; //sexta coluna: posição x
+	double g; //sétima coluna: posição y
+
+	std::string sInitAction = std::to_string(initAction);
+	sInitAction = sInitAction + ".0";
+	std::string sClientId = std::to_string(clientId);
+
+	/*string str;
+	while (getline(infile, str)) { // Read the entire line
+	    stringstream ss(str);
+	    ss>>a>>b>>c>>d>>e>>f>>g;
+	    getline(ss, h);
+	    ... // The rest of your code
+	}*/
+
+
+	std::vector<double> clientCoord;
+	//while((infile>>a>>b>>c>>d>>e>>f>>g>>h) && getline(infile, h))
+	//while(infile>>a>>b>>c>>d>>e>>f>>g>>h)
+	std::string str;
+	while (std::getline(infile, str)) // Read the entire line
+	{
+		std::stringstream ss(str);
+		ss>>a>>b>>c>>d>>e>>f>>g;
+
+		std::string curnode = d.substr(d.find("(") + 1);
+		curnode = curnode.substr (0, curnode.length() - 1);
+		if(c == sInitAction) {
+			if(curnode == sClientId) {
+				clientCoord.push_back(f);
+				clientCoord.push_back(g);
+				break;
+			}
+		}
+	}
+	infile.close();
+	return clientCoord;
+}
+
+void createStaticMobility () {
+	std::vector<double> clientCoord = clientPosition(); //pega a posição do cliente em initAction
+
+	//verifica qual o enb mais próximo dessa posição
+	uint32_t idxFromMoreClosestEnb = 0;
+	double shortestDistance = 999999999999.0;
+	for(uint32_t i=0; i < enbXPositions.size(); i++){
+		double dist = sqrt(pow((enbXPositions[i] - clientCoord[0]), 2.0) + pow((enbYPositions[i] - clientCoord[1]), 2.0));
+		if(dist < shortestDistance){
+			shortestDistance = dist;
+			idxFromMoreClosestEnb = i;
+		}
+	}
+
+
+	//cria mobilidade constante para os eNBs
+	MobilityHelper enbmobility;
+	Ptr<ListPositionAllocator> enbPositionAlloc = CreateObject<ListPositionAllocator> ();
+	//for(uint32_t i=0;i<numberOfEdgeServers;i++){
+	//	enbPositionAlloc->Add (Vector (enbXPositions[i], enbYPositions[i], 0.0));
+	//}
+	//enbPositionAlloc->Add (Vector (3384.51, 1965.47, 0.0)); //eNB0
+	enbPositionAlloc->Add (Vector (enbXPositions[idxFromMoreClosestEnb], enbYPositions[idxFromMoreClosestEnb], 0.0)); //eNB0
+	enbmobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+	enbmobility.SetPositionAllocator(enbPositionAlloc);
+	enbmobility.Install (enbNodes);
+
+	//cria mobilidade constante para os edge nodes
+	MobilityHelper edgeMobility;
+	Ptr<ListPositionAllocator> edgePositionAlloc = CreateObject<ListPositionAllocator> ();
+	//for(uint32_t i=0;i<numberOfEdgeServers;i++){
+	//	edgePositionAlloc->Add (Vector (enbXPositions[i] + 10.0, enbYPositions[i], 0.0));
+	//}
+	//edgePositionAlloc->Add (Vector (3384.51 + 10.0, 1965.47, 0.0)); //SUE0
+	edgePositionAlloc->Add (Vector (enbXPositions[idxFromMoreClosestEnb]+10.0, enbYPositions[idxFromMoreClosestEnb], 0.0)); //eNB0
+	edgeMobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+	edgeMobility.SetPositionAllocator(edgePositionAlloc);
+	edgeMobility.Install (edgeNodes);
+
+	//adiciona um ponto adicional p aumentar a bounding box do ns-3 e n gerar conflito com o mmwave
+	if(scenario == "urban"){
+		NodeContainer limitPoint;
+		limitPoint.Create(1);
+		MobilityHelper lpmobility;
+		Ptr<ListPositionAllocator> lpPositionAlloc = CreateObject<ListPositionAllocator> ();
+		lpPositionAlloc->Add (Vector (4000.0, 3000.0, 0.0));
+		lpmobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+		lpmobility.SetPositionAllocator(lpPositionAlloc);
+		lpmobility.Install (limitPoint);
+	}
+	if(scenario == "highway"){
+		NodeContainer limitPoint;
+		limitPoint.Create(1);
+		MobilityHelper lpmobility;
+		Ptr<ListPositionAllocator> lpPositionAlloc = CreateObject<ListPositionAllocator> ();
+		lpPositionAlloc->Add (Vector (3000.0, 12000.0, 0.0));
+		lpmobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+		lpmobility.SetPositionAllocator(lpPositionAlloc);
+		lpmobility.Install (limitPoint);
+	}
+}
+
+void getEnbAndEdgePoints () {
+	//configura a quantidade de edges e torres 5G
+	if((cellcoverage == "100") && (scenario == "highway")){
+		numberOfEdgeServers = 23;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/highway-100-5g-coverage-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/highway-100-5g-coverage-ypoints", "enb-ypoints");
+	}
+	if((cellcoverage == "50interleaved") && (scenario == "highway")){
+		numberOfEdgeServers = 12;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/highway-50-5g-coverage-interleaved-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/highway-50-5g-coverage-interleaved-ypoints", "enb-ypoints");
+	}
+	if((cellcoverage == "50half") && (scenario == "highway")){
+		numberOfEdgeServers = 11;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/highway-50-5g-coverage-half-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/highway-50-5g-coverage-half-ypoints", "enb-ypoints");
+	}
+	if((cellcoverage == "100") && (scenario == "urban")){
+		numberOfEdgeServers = 16;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/urban-100-5g-coverage-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/urban-100-5g-coverage-ypoints", "enb-ypoints");
+	}
+	if((cellcoverage == "50interleaved") && (scenario == "urban")){
+		numberOfEdgeServers = 8;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/urban-50-5g-coverage-interleaved-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/urban-50-5g-coverage-interleaved-ypoints", "enb-ypoints");
+	}
+	if((cellcoverage == "50half") && (scenario == "urban")){
+		numberOfEdgeServers = 8;
+		//configura posição dos eNBs
+		readLinesFromFile("inputs/urban-50-5g-coverage-half-xpoints", "enb-xpoints");
+		readLinesFromFile("inputs/urban-50-5g-coverage-half-ypoints", "enb-ypoints");
+	}
+}
+
+void configureTimeAndNumberOfNodes() {
+	//quantidade de nós e tempo inicial e final da simulação depende do cenário
+	numberOfNodes=0;
+	startTime=0.0;
+	finishTime=0.0;
+	if(traceFile == "highway-low.tcl"){
+		startTime = 126.0;
+		finishTime = 276.0;
+		numberOfNodes = 55;
+	}
+	if(traceFile == "highway-medium.tcl"){
+		startTime = 130.0;
+		finishTime = 280.0;
+		numberOfNodes = 275;
+	}
+	if(traceFile == "highway-high.tcl"){
+		startTime = 146.0;
+		finishTime = 296.0;
+		numberOfNodes = 605;
+	}
+	if(traceFile == "urban-low.tcl"){
+		startTime = 10.0;
+		finishTime = 160.0;
+		numberOfNodes = 50;
+	}
+	if(traceFile == "urban-medium.tcl"){
+		startTime = 10.0;
+		finishTime = 160.0;
+		numberOfNodes = 276;
+	}
+	if(traceFile == "urban-high.tcl"){
+		startTime = 10.0;
+		finishTime = 160.0;
+		numberOfNodes = 509;
+	}
+}
+
+// Função principal
+int main (int argc, char *argv[])
+{
+	CommandLine cmd; // análise de atributos de linha de comando
+	cmd.AddValue ("run", "Run index (for setting repeatable seeds)", run);
+	cmd.AddValue ("tracePath", "trace de mobilidade do ns-2", tracePath);
+	cmd.AddValue ("scenario", "urban ou highway", scenario);
+	cmd.AddValue ("density", "low, medium ou high", density);
+	cmd.AddValue ("cellcoverage", "tipo de cobertura das torres 5G", cellcoverage);
+	cmd.AddValue ("logFile", "arquivo de log de mobilidade", logFile);
+	cmd.AddValue ("oneImage", "tamanho e tempo de processamento de uma imagem", oneImage);
+	cmd.AddValue ("trange", "alcance de comunicação", trange);
+	cmd.AddValue ("surrogates", "quantidade de substitutos", numberOfSurrogates);
+	cmd.AddValue ("choice", "com escolha (algoritmo) ou sem", comEscolha);
+	cmd.Parse (argc,argv);
+
+	traceFile = scenario+"-"+density+".tcl";
+
+	if (traceFile.empty () || logFile.empty ()) // verifica os argumentos de linha de comando
+	{
+		std::cout << "Uso do " << argv[0] << " :\n\n"
+				"./waf --run \"olvanets  --traceFile=... --logFile=...\" \n\n";
+		return 0;
+	}
+
+	RngSeedManager::SetSeed (1);
+	RngSeedManager::SetRun (run);
+	//srand(time(NULL)); //faz uso do relógio interno do computador para controlar a escolha da semente (seed)
+
+	configureTimeAndNumberOfNodes(); //configura tempo inicial e final e número de carros
+	getEnbAndEdgePoints(); //pega as coordenadas dos edge servers e enbs para cada cenário
+
+	std::string delimiter = "-"; //pegando o tamanho e o tempo de uma imagem
+	std::string imgS = oneImage.substr(0, oneImage.find(delimiter));
+	imgSize = stoi(imgS);
+	std::string imgT = oneImage.substr(oneImage.find(delimiter)+1, oneImage.length());
+	imgTime = stod(imgT);
+	//pktAndSleep(imgSize, imgTime); //calcula o sleepTime e o packetSize
+	packetSize = 2000;
+
+	ns3::PacketMetadata::Enable (); //Registrar metadados, cabeçalhos etc dos pacotes; registra cada operação no buffer do pacote e analisa seu conteúdo
+	double interval = 1.0; // segundos
+	Time interPacketInterval = Seconds (interval);
+
+	//numberOfNodes = 2;
+	c.Create(numberOfNodes); // cria a quantidade de nós no container c
+
+	MobilityHelper mobility; // Habilitando a mobilidade do ns2 que utiliza os traces gerados pelo SUMO.
+	Ns2MobilityHelper ns2 = Ns2MobilityHelper (tracePath + traceFile); //pegando o arquivo de mobilidade e instanciando
+	//Ns2MobilityHelper ns2 = Ns2MobilityHelper ("/home/alisson/ns-3.29/mobilityTraces/teste2.tcl");
+	ns2.Install (); // instala a mobilidade por traces
+
+	os.open (logFile.c_str ()); //abre arquivo para colocar os logs
+
+	//escolhe qual carro vai ser o cliente
+	Ptr<UniformRandomVariable> xrv = CreateObject<UniformRandomVariable> ();
+	clientId = xrv->GetInteger(0, numberOfNodes);
+	clientId = 0;
+	//clientId = rand() % numberOfNodes + 0; //escolhe aleatoriamente (dentre todos os nós) um nó para ser o cliente
+
+	clients.Add(c.Get(clientId)); //adiciona o cliente escolhido no containter de clientes
+	std::cout << "[SISTEMA] ID do cliente ==> "<< clientId << std::endl;
+
+	//pega o tempo inicial aleatoriamente segundo seed/run
+	Ptr<UniformRandomVariable> yrv = CreateObject<UniformRandomVariable> ();
+	initAction = yrv->GetInteger(startTime, startTime + 80);
+	initAction = 0;
+	//uint32_t initAction = rand() % 80 + startTime; //agenda a execução da ação entre 10 e 90s da simulação
+	//uint32_t initAction = 10;
+
+	//configura CPU ocupada dos edge nodes, pegando números aleatórios de arquivo
+	readLinesFromFile("inputs/edgeCpuBusy.txt", "edgeCPU");
+	//configura CPU ocupada dos carros, pegando números aleatórios de arquivo
+	readLinesFromFile("inputs/carCpuBusy.txt", "carCPU");
+
+	//cria os enbs e os computadores de borda
+	//enbNodes.Create (numberOfEdgeServers);
+	enbNodes.Create (1);
+	//edgeNodes.Create (numberOfEdgeServers);
+	edgeNodes.Create (1);
+
+	createStaticMobility(); //cria a mobilidade estática dos enbs, edge servers e ponto limite
+
+	initializeMmWave(); //inicializa as funções do mmwave
+	initializeWave(); //inicializa as funções do wave
+
+	//configura a aplicação de mensagens beacons (BSM - Basic Safety Messages)
+	WaveBsmHelper waveBsm;
+	m_txSafetyRanges.push_back(251.0);
+	WaveBsmHelper::GetNodesMoving().resize(numberOfNodes,1); //inicialmente supõe que todos os nós estão se movendo
+	waveBsm.Install(ips, Seconds (finishTime), 200, Seconds(3), 40,	m_txSafetyRanges,
+			//0, MilliSeconds(10), Seconds(0)); //coloca os beacons para começar
+			0, MilliSeconds(10)); //coloca os beacons para começar
+
+	std::cout << "[SISTEMA] Execução inicia em ==> "<< initAction << " segundos" << std::endl;
+	//Simulator::Schedule(Seconds(initAction),&GetTempoIni); //pega o tempo inicial
+	std::cout << "[SISTEMA] Número de substitutos ==> "<< surrogates.GetN() << std::endl;
+
+	AnimationInterface anim ("vanets-animation.xml"); //animação do netanim gerada para análise
+	anim.SetMaxPktsPerTraceFile(5000000000);
+	//AsciiTraceHelper ascii; //usado para tracefile
+	//wifiPhy.EnableAsciiAll (ascii.CreateFileStream ("results/resultados.tr")); //habilita tracefile
+	//wifiPhy.EnablePcap ("client-80211p", devices); //habilita a geração de pcap por placa de rede
+	//wifiPhy.EnablePcapAll("vanets_cap"); //habilita a geração de pcap para tudo
+
+	double initAction2 = 0.1;
+	Simulator::Schedule(Seconds(initAction2),clientRequest,wReqBcSock); //cliente envia pacote em broadcast para descoberta
+	Simulator::Schedule(Seconds(initAction2),clientRequest,mmwReqUncSock); //cliente envia pacote em unicast para enb
+	//Simulator::Schedule(Seconds(finishTime-0.1),&checkOffloadingSuccess);
+	Simulator::Stop (Seconds (finishTime)); //simulação para em 170s
+	Simulator::Run (); //executa a simulação
+	Simulator::Destroy (); //destroi a simulação
+	os.close (); //fecha o arquivo de log
+	return 0; //termina o programa
+}

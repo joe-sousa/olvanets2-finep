@@ -1,0 +1,3 @@
+awk -f tp.awk ../results/highway-low.tcl-66490-1.903-200.000000-2-0.tr >> ../plots/dat/tp-66490-1.903-2-0.dat
+awk -i inplace -f add-initial-column.awk ../plots/dat/tp-66490-1.903-2-0.dat >> ../plots/dat/tp-66490-1.903-2-0.dat
+awk -f tp.awk ../results/urban-low.tcl-66490-1.903-200.000000-4-1.tr >> ../plots/teste

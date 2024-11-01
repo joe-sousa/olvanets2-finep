@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on sáb 25 abr 2020 13:04:45 -03 by Eclipse SUMO netedit Version v1_5_0+0464-744bef2e7c
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/highway-br116.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/highway-br116.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <route-files value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/esparso/highway-low.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="myType" maxSpeed="16.70" vClass="passenger"/>
+    <vehicle id="0" type="myType" depart="0.00">
+        <route edges="gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2" color="yellow"/>
+    </vehicle>
+    <vehicle id="1" type="myType" depart="2.14">
+        <route edges="372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="2" type="myType" depart="4.28">
+        <route edges="gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0" color="yellow"/>
+    </vehicle>
+    <vehicle id="3" type="myType" depart="6.42">
+        <route edges="372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49" color="yellow"/>
+    </vehicle>
+    <vehicle id="4" type="myType" depart="8.56">
+        <route edges="608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50" color="yellow"/>
+    </vehicle>
+    <vehicle id="5" type="myType" depart="10.70">
+        <route edges="378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9" color="yellow"/>
+    </vehicle>
+    <vehicle id="6" type="myType" depart="12.84">
+        <route edges="378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266" color="yellow"/>
+    </vehicle>
+    <vehicle id="7" type="myType" depart="14.98">
+        <route edges="754831548 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261" color="yellow"/>
+    </vehicle>
+    <vehicle id="8" type="myType" depart="17.12">
+        <route edges="608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4" color="yellow"/>
+    </vehicle>
+    <vehicle id="9" type="myType" depart="19.26">
+        <route edges="gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="10" type="myType" depart="21.40">
+        <route edges="378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40" color="yellow"/>
+    </vehicle>
+    <vehicle id="11" type="myType" depart="23.54">
+        <route edges="372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="12" type="myType" depart="25.68">
+        <route edges="372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48" color="yellow"/>
+    </vehicle>
+    <vehicle id="13" type="myType" depart="27.82">
+        <route edges="gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2" color="yellow"/>
+    </vehicle>
+    <vehicle id="14" type="myType" depart="29.96">
+        <route edges="608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51" color="yellow"/>
+    </vehicle>
+    <vehicle id="15" type="myType" depart="32.10">
+        <route edges="gneE19 608991522#2 608991522#2-AddedOffRampEdge 372634262 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50" color="yellow"/>
+    </vehicle>
+    <vehicle id="16" type="myType" depart="34.24">
+        <route edges="608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1" color="yellow"/>
+    </vehicle>
+    <vehicle id="17" type="myType" depart="36.38">
+        <route edges="gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35" color="yellow"/>
+    </vehicle>
+    <vehicle id="18" type="myType" depart="38.52">
+        <route edges="372634262 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4" color="yellow"/>
+    </vehicle>
+    <vehicle id="19" type="myType" depart="40.66">
+        <route edges="608991522#2 608991522#2-AddedOffRampEdge 372634262 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18" color="yellow"/>
+    </vehicle>
+    <vehicle id="20" type="myType" depart="42.80">
+        <route edges="608991522#6" color="yellow"/>
+    </vehicle>
+    <vehicle id="21" type="myType" depart="44.94">
+        <route edges="gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 754831550 733263416" color="yellow"/>
+    </vehicle>
+    <vehicle id="22" type="myType" depart="47.08">
+        <route edges="gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9" color="yellow"/>
+    </vehicle>
+    <vehicle id="23" type="myType" depart="49.22">
+        <route edges="754822745 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1" color="yellow"/>
+    </vehicle>
+    <vehicle id="24" type="myType" depart="51.36">
+        <route edges="gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50" color="yellow"/>
+    </vehicle>
+    <vehicle id="25" type="myType" depart="53.50">
+        <route edges="372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7" color="yellow"/>
+    </vehicle>
+    <vehicle id="26" type="myType" depart="55.64">
+        <route edges="372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7" color="yellow"/>
+    </vehicle>
+    <vehicle id="27" type="myType" depart="57.78">
+        <route edges="608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="28" type="myType" depart="59.92">
+        <route edges="gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9" color="yellow"/>
+    </vehicle>
+    <vehicle id="29" type="myType" depart="62.06">
+        <route edges="372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7" color="yellow"/>
+    </vehicle>
+    <vehicle id="30" type="myType" depart="64.20">
+        <route edges="gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268" color="yellow"/>
+    </vehicle>
+    <vehicle id="31" type="myType" depart="66.34">
+        <route edges="372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9" color="yellow"/>
+    </vehicle>
+    <vehicle id="32" type="myType" depart="68.48">
+        <route edges="372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="33" type="myType" depart="70.62">
+        <route edges="gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5" color="yellow"/>
+    </vehicle>
+    <vehicle id="34" type="myType" depart="72.76">
+        <route edges="372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7" color="yellow"/>
+    </vehicle>
+    <vehicle id="35" type="myType" depart="74.90">
+        <route edges="378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="36" type="myType" depart="77.04">
+        <route edges="608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2" color="yellow"/>
+    </vehicle>
+    <vehicle id="37" type="myType" depart="79.18">
+        <route edges="372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17" color="yellow"/>
+    </vehicle>
+    <vehicle id="38" type="myType" depart="81.32">
+        <route edges="378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8" color="yellow"/>
+    </vehicle>
+    <vehicle id="39" type="myType" depart="83.46">
+        <route edges="372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42" color="yellow"/>
+    </vehicle>
+    <vehicle id="40" type="myType" depart="85.60">
+        <route edges="372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 754822745" color="yellow"/>
+    </vehicle>
+    <vehicle id="41" type="myType" depart="87.74">
+        <route edges="gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4" color="yellow"/>
+    </vehicle>
+    <vehicle id="42" type="myType" depart="89.88">
+        <route edges="733263416 754831548 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52" color="yellow"/>
+    </vehicle>
+    <vehicle id="43" type="myType" depart="92.02">
+        <route edges="608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3" color="yellow"/>
+    </vehicle>
+    <vehicle id="44" type="myType" depart="94.16">
+        <route edges="372634262 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28" color="yellow"/>
+    </vehicle>
+    <vehicle id="45" type="myType" depart="96.30">
+        <route edges="372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="46" type="myType" depart="98.44">
+        <route edges="378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6" color="yellow"/>
+    </vehicle>
+    <vehicle id="47" type="myType" depart="100.58">
+        <route edges="372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 754831550 733263416 754831548" color="yellow"/>
+    </vehicle>
+    <vehicle id="48" type="myType" depart="102.72">
+        <route edges="608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="49" type="myType" depart="104.86">
+        <route edges="378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9" color="yellow"/>
+    </vehicle>
+    <vehicle id="50" type="myType" depart="107.00">
+        <route edges="gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge" color="yellow"/>
+    </vehicle>
+    <vehicle id="51" type="myType" depart="109.14">
+        <route edges="372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4" color="yellow"/>
+    </vehicle>
+    <vehicle id="52" type="myType" depart="111.28">
+        <route edges="gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8" color="yellow"/>
+    </vehicle>
+    <vehicle id="53" type="myType" depart="113.42">
+        <route edges="378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35" color="yellow"/>
+    </vehicle>
+    <vehicle id="54" type="myType" depart="115.56">
+        <route edges="608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 754831550 733263416 754831548" color="yellow"/>
+    </vehicle>
+    <vehicle id="55" type="myType" depart="117.70">
+        <route edges="372634261 608991522#4" color="yellow"/>
+    </vehicle>
+    <vehicle id="56" type="myType" depart="119.84">
+        <route edges="gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41" color="yellow"/>
+    </vehicle>
+    <vehicle id="57" type="myType" depart="121.98">
+        <route edges="372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1" color="yellow"/>
+    </vehicle>
+    <vehicle id="58" type="myType" depart="124.12">
+        <route edges="372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267" color="yellow"/>
+    </vehicle>
+    <vehicle id="59" type="myType" depart="126.26">
+        <route edges="gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264" color="yellow"/>
+    </vehicle>
+    <vehicle id="60" type="myType" depart="128.40">
+        <route edges="372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3" color="yellow"/>
+    </vehicle>
+    <vehicle id="61" type="myType" depart="130.54">
+        <route edges="372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42" color="yellow"/>
+    </vehicle>
+    <vehicle id="62" type="myType" depart="132.68">
+        <route edges="372634263#5-AddedOffRampEdge 372634263#6 372634263#7-AddedOnRampEdge 372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52" color="yellow"/>
+    </vehicle>
+    <vehicle id="63" type="myType" depart="134.82">
+        <route edges="372634263#7 372634263#8 gneE45 gneE47 gneE46 gneE48 gneE49 gneE50 gneE51 gneE52 gneE17 gneE18 gneE19 608991522#2 608991522#2-AddedOffRampEdge 608991522#3 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8" color="yellow"/>
+    </vehicle>
+    <vehicle id="64" type="myType" depart="136.96">
+        <route edges="gneE45 gneE47 gneE46 gneE48" color="yellow"/>
+    </vehicle>
+    <vehicle id="65" type="myType" depart="139.10">
+        <route edges="372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634268 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 754831550 733263416" color="yellow"/>
+    </vehicle>
+    <vehicle id="66" type="myType" depart="141.24">
+        <route edges="378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39" color="yellow"/>
+    </vehicle>
+    <vehicle id="67" type="myType" depart="143.38">
+        <route edges="372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0" color="yellow"/>
+    </vehicle>
+    <vehicle id="68" type="myType" depart="145.52">
+        <route edges="378235159#8 378235159#9 378235159#10-AddedOnRampEdge 378235159#10 372634264 372634263#0 372634263#1 372634263#2 372634263#3 372634263#4 372634263#5-AddedOnRampEdge 372634263#5 372634263#5-AddedOffRampEdge 372634261 608991522#4 608991522#5" color="yellow"/>
+    </vehicle>
+    <vehicle id="69" type="myType" depart="147.66">
+        <route edges="gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7" color="yellow"/>
+    </vehicle>
+    <vehicle id="70" type="myType" depart="149.80">
+        <route edges="608991522#5 608991522#5-AddedOffRampEdge 608991522#6 608991522#7 608991522#8 608991522#9 372634266 372634265#0 372634265#1 372634265#2 372634265#3-AddedOnRampEdge 372634265#3 gneE1 372634265#6-AddedOnRampEdge 372634265#6 372634265#7 372634265#8 372634265#9 gneE28 gneE40 gneE29 gneE41 gneE30 gneE43 gneE39 gneE34 gneE38 gneE35 gneE42 378235159#0 378235159#1 378235159#2 378235159#3 378235159#4 378235159#4-AddedOffRampEdge 378235159#5 378235159#6 378235159#7 378235159#8 372634267" color="yellow"/>
+    </vehicle>
+</routes>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on qua 30 set 2020 11:08:22 -03 by Eclipse SUMO GUI Version v1_5_0+0464-744bef2e7c
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="/home/alisson/desktop/olvanets/sumo/urban-new-traces-ph/manhattan_2km.net.xml"/>
+        <route-files value="/home/alisson/desktop/olvanets/sumo/urban-new-traces-ph/esparso/manhattan-low.rou.xml"/>
+    </input>
+
+</configuration>

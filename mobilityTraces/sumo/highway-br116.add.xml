@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on qua 22 abr 2020 11:46:20 -03 by Eclipse SUMO netedit Version v1_5_0+0464-744bef2e7c
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/highway-br116.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/highway-br116.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <additional-files value="/home/paulo/Documentos/mestrado/pesquisa/cenario-5km/highway-br116.add.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <rerouter id="rerouter_1" edges="372634263#9 608991522#2" pos="2579.51,7147.85" vTypes="all">
+        <interval begin="0.00" end="3600.00">
+            <closingReroute id="372634263#9"/>
+            <destProbReroute id="608991522#2"/>
+        </interval>
+    </rerouter>
+    <rerouter id="rerouter_3" edges="372634265#9 378235159#0" pos="1724.83,11407.95" vTypes="all">
+        <interval begin="0.00" end="3600.00">
+            <closingReroute id="372634265#9"/>
+            <destProbReroute id="378235159#0"/>
+        </interval>
+    </rerouter>
+</additional>

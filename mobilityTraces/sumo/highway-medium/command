@@ -1,0 +1,3 @@
+/usr/share/sumo/tools/randomTrips.py -n highway-br116.net.xml --trip-attributes="type=\"myType\"" --additional-file type.add.xml --edge-permission passenger -r highway-medium.rou.xml -b 0 -e 150 -p 0.4050
+
+110s ~ 260s
