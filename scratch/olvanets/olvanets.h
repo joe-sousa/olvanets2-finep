@@ -94,6 +94,7 @@ void hvcDecision(Ipv4Address ipv4From, uint32_t iface);
 void clientRecRepPkt(Ptr<Socket> socket);
 void initializeWave ();
 void initializeMmWave ();
+void idClient ();
 std::vector<double> clientPosition ();
 void createStaticMobility ();
 void getEnbAndEdgePoints ();

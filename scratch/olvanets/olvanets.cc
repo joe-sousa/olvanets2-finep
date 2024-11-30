@@ -1417,6 +1417,46 @@ void initializeMmWave () {
 	}
 }
 
+void idClient(){
+	std::vector<uint32_t> allowedNumbers; // Conjunto de números permitido
+	Ptr<UniformRandomVariable> xrv = CreateObject<UniformRandomVariable>(); // Criar a variável aleatória
+	uint32_t randomNumber;
+	if(clientType == "moto"){
+		if(scenario == "urban"){
+			if(density == "low"){
+				allowedNumbers = {0, 1, 14, 15, 16, 17, 2, 24, 25, 26, 3, 40, 41, 42, 43}; 
+			} else if (density == "medium"){
+				allowedNumbers = {0, 1, 101, 102, 103, 104, 105, 108, 109, 110, 111, 112, 123, 124, 125, 126, 127,
+   								136, 137, 149, 150, 151, 152, 153, 156, 157, 158, 159, 160, 166, 167, 168, 169, 170,
+    							184, 185, 186, 187, 188, 195, 196, 2, 200, 201, 202, 203, 204, 214, 215, 216, 217,
+    							218, 223, 224, 225, 226, 227, 231, 232, 3, 35, 36, 37, 38, 39, 4, 49, 50, 55, 56, 63,
+    							64, 65, 66, 67, 80, 81, 82, 83, 84};
+			} else if (density == "high"){
+				allowedNumbers = {0, 1, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151,
+        					174, 175, 176, 177, 178, 179, 18, 180, 181, 182, 183, 19, 2, 20, 200, 201, 202, 203, 204, 205, 206, 207,
+        					208, 209, 21, 213, 214, 215, 216, 217, 218, 219, 22, 220, 221, 222, 23, 234, 235, 236, 237, 238, 239, 24,
+        					240, 241, 242, 243, 25, 26, 27, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 3, 307, 308, 309, 310,
+        					311, 312, 313, 314, 315, 316, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 4, 417, 418, 419, 420, 421,
+        					422, 423, 424, 425, 426, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 5, 528, 529, 530, 531, 532, 533,
+        					534, 535, 536, 537, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 6, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+        					69, 7, 8, 9, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99};
+			}
+		}
+		uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
+		randomNumber = allowedNumbers[randomIndex]; // Selecionar o número correspondente no conjunto
+		while(carEnergyLevel[randomNumber] < carMinimalEnergy[randomNumber]){ //roda até achar um cliente que tenha energia suficiente
+			randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1);
+			randomNumber = allowedNumbers[randomIndex];
+		}
+	} else if (clientType == "any"){
+		randomNumber = xrv->GetInteger(0, numberOfNodes);
+		while(carEnergyLevel[randomNumber] < carMinimalEnergy[randomNumber]){ //roda até achar um cliente que tenha energia suficiente
+			randomNumber = xrv->GetInteger(0, numberOfNodes);
+		}
+	}
+	clientId = randomNumber;
+}
+
 std::vector<double> clientPosition () {
 	//std::ifstream infile(tracePath + traceFile, std::ios::in);
 	std::ifstream infile(tracePath + "current.tcl", std::ios::in);  //lembrar que houve corte em buildTcl()
@@ -1658,6 +1698,7 @@ int main (int argc, char *argv[])
 	cmd.AddValue ("algorithm", "algoritmo", algorithm);
 	//cmd.AddValue ("numberOfCycles", "número de ciclos do abc", numberOfCycles);
 	//cmd.AddValue ("foodSources", "fontes de comida do abc", foodSources);
+	cmd.AddValue ("clientType", "tipo de cliente", clientType);
 	cmd.Parse (argc,argv);
 
 	//pknownRoutes="50";
@@ -1717,12 +1758,7 @@ int main (int argc, char *argv[])
 
 	os.open (logFile.c_str (), std::ofstream::out); //abre arquivo para colocar os logs
 
-	//escolhe qual carro vai ser o cliente
-	Ptr<UniformRandomVariable> xrv = CreateObject<UniformRandomVariable> ();
-	clientId = xrv->GetInteger(0, numberOfNodes);
-	while(carEnergyLevel[clientId] < carMinimalEnergy[clientId]){ //roda até achar um cliente que tenha energia suficiente
-		clientId = xrv->GetInteger(0, numberOfNodes);
-	}
+	idClient(); //escolhe qual carro vai ser o cliente
 	//clientId = 241;
 	//clientId = 0;
 	//clientId = rand() % numberOfNodes + 0; //escolhe aleatoriamente (dentre todos os nós) um nó para ser o cliente

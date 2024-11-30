@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug ns-3",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scratch/olvanets/olvanets",
+      "args": [
+        "--run=1",
+        "--tracepath=/home/alisson/ns-3.29/mobilityTraces/",
+        "--scenario=urban",
+        "--density=low",
+        "--cellcoverage=100",
+        "--knownroutes=50",
+        "--workload=1",
+        "--algorithm=gtt",
+        "--clientType=moto"
+      ],
+      "stopAtEntry": false,
+      "cwd": ".",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        {
+          "description": "Habilitar impressão de valores para GDB",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

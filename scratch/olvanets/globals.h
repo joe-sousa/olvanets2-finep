@@ -94,6 +94,7 @@ extern double wSumCpuReq; //soma de cpu required de todas as tasks do workload
 extern double replyTime; //tempo para o servidor responder à solicitação, p evitar concorrência no canal
 extern double elapsedTime; //para medir o tempo que roda o algoritmo
 
+extern std::string clientType; //tipo de cliente: qualquer um ou apenas moto
 extern std::string algorithm;
 extern std::string pknownRoutes; //porcentagem de rotas conhecidas
 extern std::string tracePath; //caminho do trace de mobilidade

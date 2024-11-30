@@ -79,6 +79,7 @@ double wSumCpuReq=0.0; //soma de cpu required de todas as tasks do workload
 double replyTime = 0.0; //tempo para o servidor responder à solicitação, p evitar concorrência no canal
 double elapsedTime; //para medir o tempo que roda o algoritmo
 
+std::string clientType; //tipo de cliente: qualquer um ou apenas moto
 std::string algorithm;
 std::string pknownRoutes; //porcentagem de rotas conhecidas
 std::string tracePath; //caminho do trace de mobilidade
