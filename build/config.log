@@ -1,6 +1,6 @@
-# project ns (3.29) configured on Sat Nov 30 21:07:38 2024 by
+# project ns (3.29) configured on Wed Dec 11 10:21:55 2024 by
 # waf 2.0.9 (abi 20, python 20712f0 on linux2)
-# using ./waf configure --build-profile=debug --enable-examples --disable-werror
+# using ./waf configure --disable-werror --enable-examples --build-profile=debug
 #
 ----------------------------------------
 Setting top to
@@ -832,18 +832,18 @@ Checking for compilation flag -Wl,--soname=foo support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_fac013c0bb139445ff717cc4062b41b4/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_fac013c0bb139445ff717cc4062b41b4/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-Wl,--soname=foo', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for compilation flag -std=c++11 support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_fac013c0bb139445ff717cc4062b41b4/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_fac013c0bb139445ff717cc4062b41b4/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------
 Checking for program 'python'
@@ -948,16 +948,16 @@ int main(int argc, char **argv)
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_a34322b4bfa63f9f6e692f1e5cc4757b/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_0405c90e4cdabd1d71445c3440873ef7/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fno-strict-aliasing', '-g', '-O2', '-g', '-fwrapv', '-O3', '-I/usr/local/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/site-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/site-packages"', '-DNDEBUG', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_a34322b4bfa63f9f6e692f1e5cc4757b/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_a34322b4bfa63f9f6e692f1e5cc4757b/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fno-strict-aliasing', '-g', '-O2', '-g', '-fwrapv', '-O3', '-I/usr/local/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/site-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/site-packages"', '-DNDEBUG', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_0405c90e4cdabd1d71445c3440873ef7/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_0405c90e4cdabd1d71445c3440873ef7/testbuild/testprog[0m
 
-['/usr/bin/g++', '-Xlinker', '-export-dynamic', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_a34322b4bfa63f9f6e692f1e5cc4757b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/local/lib/python2.7/config', '-lpython2.7', '-ldl', '-lm', '-lpython2.7', '-ldl', '-lm']
+['/usr/bin/g++', '-Xlinker', '-export-dynamic', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_0405c90e4cdabd1d71445c3440873ef7/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/local/lib/python2.7/config', '-lpython2.7', '-ldl', '-lm', '-lpython2.7', '-ldl', '-lm']
 err: /usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(posixmodule.o): na função "posix_tempnam":
-/home/alisson/Programas/Python-2.7.18/./Modules/posixmodule.c:7595:(.text.unlikely+0x11f1): aviso: the use of `tempnam' is dangerous, better use `mkstemp'
+/usr/src/Python-2.7.18/./Modules/posixmodule.c:7595:(.text+0xbde): aviso: the use of `tempnam' is dangerous, better use `mkstemp'
 /usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(posixmodule.o): na função "posix_tmpnam":
-/home/alisson/Programas/Python-2.7.18/./Modules/posixmodule.c:7648:(.text.unlikely+0x1304): aviso: the use of `tmpnam_r' is dangerous, better use `mkstemp'
+/usr/src/Python-2.7.18/./Modules/posixmodule.c:7648:(.text+0xac6): aviso: the use of `tmpnam_r' is dangerous, better use `mkstemp'
 
 yes
 ------------------------------------------------------------------
@@ -992,18 +992,18 @@ int main(int argc, char **argv)
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4598e358bd4e921e97f918b48a80fc36/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_bc3125207c17382561156db2828d037b/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fPIC', '-fno-strict-aliasing', '-g', '-O2', '-g', '-fwrapv', '-O3', '-I/usr/local/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/site-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/site-packages"', '-DHAVE_PYEMBED=1', '-DNDEBUG', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4598e358bd4e921e97f918b48a80fc36/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4598e358bd4e921e97f918b48a80fc36/testbuild/testprog.so[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fPIC', '-fno-strict-aliasing', '-g', '-O2', '-g', '-fwrapv', '-O3', '-I/usr/local/include/python2.7', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DPYTHONDIR="/usr/local/lib/python2.7/site-packages"', '-DPYTHONARCHDIR="/usr/local/lib/python2.7/site-packages"', '-DHAVE_PYEMBED=1', '-DNDEBUG', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_bc3125207c17382561156db2828d037b/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_bc3125207c17382561156db2828d037b/testbuild/testprog.so[0m
 
-['/usr/bin/g++', '-shared', '-Xlinker', '-export-dynamic', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4598e358bd4e921e97f918b48a80fc36/testbuild/testprog.so', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/local/lib/python2.7/config', '-lpython2.7', '-ldl', '-lm', '-lpython2.7', '-ldl', '-lm']
+['/usr/bin/g++', '-shared', '-Xlinker', '-export-dynamic', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_bc3125207c17382561156db2828d037b/testbuild/testprog.so', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-L/usr/local/lib/python2.7/config', '-lpython2.7', '-ldl', '-lm', '-lpython2.7', '-ldl', '-lm']
 err: /usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(posixmodule.o): na função "posix_tempnam":
-/home/alisson/Programas/Python-2.7.18/./Modules/posixmodule.c:7595:(.text.unlikely+0x11f1): aviso: the use of `tempnam' is dangerous, better use `mkstemp'
+/usr/src/Python-2.7.18/./Modules/posixmodule.c:7595:(.text+0xbde): aviso: the use of `tempnam' is dangerous, better use `mkstemp'
 /usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(posixmodule.o): na função "posix_tmpnam":
-/home/alisson/Programas/Python-2.7.18/./Modules/posixmodule.c:7648:(.text.unlikely+0x1304): aviso: the use of `tmpnam_r' is dangerous, better use `mkstemp'
-/usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(dictobject.o): aviso: relocalização contra "PyDictKeys_Type" em secção só de leitura ".text.unlikely"
-/usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(pythonrun.o): relocalização R_X86_64_PC32 contra símbolo "Py_InteractiveFlag" não pode ser usada ao fazer um objecto partilhado; recompilar com -fPIC
+/usr/src/Python-2.7.18/./Modules/posixmodule.c:7648:(.text+0xac6): aviso: the use of `tmpnam_r' is dangerous, better use `mkstemp'
+/usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(dictobject.o): aviso: relocalização contra "PyDictKeys_Type" em secção só de leitura ".text"
+/usr/bin/ld: /usr/local/lib/python2.7/config/libpython2.7.a(sysmodule.o): relocalização R_X86_64_PC32 contra símbolo "_PyThreadState_Current" não pode ser usada ao fazer um objecto partilhado; recompilar com -fPIC
 /usr/bin/ld: vinculação final falhou: mau valor
 collect2: error: ld returned 1 exit status
 
@@ -1019,327 +1019,25 @@ Could not build python extensions
 from /home/alisson/ns-allinone-3.29/ns-3.29/bindings/python: The configuration failed
 ------------------------------------------------------------------
 Checking boost includes
-1_83
-------------------------------------------------------------------
-Checking boost libs
-Found the boost path in /usr/lib/x86_64-linux-gnu with the libraries:
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.a
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.a
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_container.a
-    /usr/lib/x86_64-linux-gnu/libboost_container.so
-    /usr/lib/x86_64-linux-gnu/libboost_container.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_context.a
-    /usr/lib/x86_64-linux-gnu/libboost_context.so
-    /usr/lib/x86_64-linux-gnu/libboost_context.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.a
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.so
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.a
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_exception.a
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.a
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.so
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.a
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_json.a
-    /usr/lib/x86_64-linux-gnu/libboost_json.so
-    /usr/lib/x86_64-linux-gnu/libboost_json.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_locale.a
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_log.a
-    /usr/lib/x86_64-linux-gnu/libboost_log.so
-    /usr/lib/x86_64-linux-gnu/libboost_log.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.a
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.a
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.so
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.a
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.so
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.a
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_python312.a
-    /usr/lib/x86_64-linux-gnu/libboost_python312.so
-    /usr/lib/x86_64-linux-gnu/libboost_python312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_random.a
-    /usr/lib/x86_64-linux-gnu/libboost_random.so
-    /usr/lib/x86_64-linux-gnu/libboost_random.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_regex.a
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_system.a
-    /usr/lib/x86_64-linux-gnu/libboost_system.so
-    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_timer.a
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.a
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.so
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.a
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_url.a
-    /usr/lib/x86_64-linux-gnu/libboost_url.so
-    /usr/lib/x86_64-linux-gnu/libboost_url.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_wave.a
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so.1.83.0
-Trying pattern boost_system(-gcc[0-9]{0,3})-1_83.so$
-Trying pattern boost_system-1_83.so$
-Trying pattern boost_system(-gcc[0-9]{0,3}).so$
-Trying pattern boost_system.so$
-Found boost lib /usr/lib/x86_64-linux-gnu/libboost_system.so
-Trying pattern boost_signals(-gcc[0-9]{0,3})-1_83.so$
-Trying pattern boost_signals-1_83.so$
-Trying pattern boost_signals(-gcc[0-9]{0,3}).so$
-Trying pattern boost_signals.so$
-Trying pattern boost_signals.so$
-Trying pattern boost_signals
-lib signals not found in /usr/lib/x86_64-linux-gnu
+headers not found, please provide a --boost-includes argument (see help)
 from /home/alisson/ns-allinone-3.29/ns-3.29/src: The configuration failed
 ------------------------------------------------------------------
 Checking boost includes
-1_83
-------------------------------------------------------------------
-Checking boost libs
-Found the boost path in /usr/lib/x86_64-linux-gnu with the libraries:
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.a
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-    /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.a
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-    /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_container.a
-    /usr/lib/x86_64-linux-gnu/libboost_container.so
-    /usr/lib/x86_64-linux-gnu/libboost_container.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_context.a
-    /usr/lib/x86_64-linux-gnu/libboost_context.so
-    /usr/lib/x86_64-linux-gnu/libboost_context.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.a
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.so
-    /usr/lib/x86_64-linux-gnu/libboost_coroutine.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.a
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_exception.a
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.a
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.so
-    /usr/lib/x86_64-linux-gnu/libboost_fiber.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.a
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.a
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so
-    /usr/lib/x86_64-linux-gnu/libboost_graph_parallel.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.a
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
-    /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_json.a
-    /usr/lib/x86_64-linux-gnu/libboost_json.so
-    /usr/lib/x86_64-linux-gnu/libboost_json.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_locale.a
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so
-    /usr/lib/x86_64-linux-gnu/libboost_locale.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_log.a
-    /usr/lib/x86_64-linux-gnu/libboost_log.so
-    /usr/lib/x86_64-linux-gnu/libboost_log.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.a
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so
-    /usr/lib/x86_64-linux-gnu/libboost_log_setup.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99f.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_c99l.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1f.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.a
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so
-    /usr/lib/x86_64-linux-gnu/libboost_math_tr1l.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.a
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.so
-    /usr/lib/x86_64-linux-gnu/libboost_mpi_python312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.a
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.so
-    /usr/lib/x86_64-linux-gnu/libboost_nowide.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.a
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.so
-    /usr/lib/x86_64-linux-gnu/libboost_numpy312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so
-    /usr/lib/x86_64-linux-gnu/libboost_prg_exec_monitor.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.a
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so
-    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_python312.a
-    /usr/lib/x86_64-linux-gnu/libboost_python312.so
-    /usr/lib/x86_64-linux-gnu/libboost_python312.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_random.a
-    /usr/lib/x86_64-linux-gnu/libboost_random.so
-    /usr/lib/x86_64-linux-gnu/libboost_random.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_regex.a
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so
-    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_addr2line.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_backtrace.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_basic.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.a
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.so
-    /usr/lib/x86_64-linux-gnu/libboost_stacktrace_noop.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_system.a
-    /usr/lib/x86_64-linux-gnu/libboost_system.so
-    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_test_exec_monitor.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.a
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so
-    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_timer.a
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so
-    /usr/lib/x86_64-linux-gnu/libboost_timer.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.a
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.so
-    /usr/lib/x86_64-linux-gnu/libboost_type_erasure.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.a
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so
-    /usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_url.a
-    /usr/lib/x86_64-linux-gnu/libboost_url.so
-    /usr/lib/x86_64-linux-gnu/libboost_url.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_wave.a
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so
-    /usr/lib/x86_64-linux-gnu/libboost_wave.so.1.83.0
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.a
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so
-    /usr/lib/x86_64-linux-gnu/libboost_wserialization.so.1.83.0
-Trying pattern boost_system(-gcc[0-9]{0,3})-1_83.so$
-Trying pattern boost_system-1_83.so$
-Trying pattern boost_system(-gcc[0-9]{0,3}).so$
-Trying pattern boost_system.so$
-Found boost lib /usr/lib/x86_64-linux-gnu/libboost_system.so
-Trying pattern boost_signals(-gcc[0-9]{0,3})-1_83.so$
-Trying pattern boost_signals-1_83.so$
-Trying pattern boost_signals(-gcc[0-9]{0,3}).so$
-Trying pattern boost_signals.so$
-Trying pattern boost_signals.so$
-Trying pattern boost_signals
-lib signals not found in /usr/lib/x86_64-linux-gnu
+headers not found, please provide a --boost-includes argument (see help)
 from /home/alisson/ns-allinone-3.29/ns-3.29/src: The configuration failed
 ------------------------------------------------------------------
 Checking for click location
 not found
 ------------------------------------------------------------------
 Checking for program 'pkg-config'
-/usr/bin/pkg-config
-find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> ['/usr/bin/pkg-config']
-------------------------------------------------------------------
-Checking for 'gtk+-3.0'
-['/usr/bin/pkg-config', '--cflags', '--libs', 'gtk+-3.0']
-err: Package gtk+-3.0 was not found in the pkg-config search path.
-Perhaps you should add the directory containing `gtk+-3.0.pc'
-to the PKG_CONFIG_PATH environment variable
-Package 'gtk+-3.0', required by 'virtual:world', not found
-
 not found
-from /home/alisson/ns-allinone-3.29/ns-3.29/src/config-store: The configuration failed
+find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29/src/config-store: Could not find the program ['pkg-config']
 ------------------------------------------------------------------
-Checking for 'libxml-2.0'
-['/usr/bin/pkg-config', '--cflags', '--libs', 'libxml-2.0']
-out: -I/usr/include/libxml2 -lxml2 
-
-yes
+Checking for program 'pkg-config'
+not found
+find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29/src/config-store: Could not find the program ['pkg-config']
 ------------------------------------------------------------------
 checking for uint128_t
 ==>
@@ -1354,9 +1052,9 @@ checking for uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_bfdde83183fcb3341711a03669f83d7c/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_a00d769dbde5666901992186bb74d022/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_bfdde83183fcb3341711a03669f83d7c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_a00d769dbde5666901992186bb74d022/testbuild/test.cpp.1.o']
 err: ../test.cpp: In function ‘int main(int, char**)’:
 ../test.cpp:6:14: error: ‘uint128_t’ was not declared in this scope; did you mean ‘uint8_t’?
     6 |         if ((uint128_t *) 0) return 0;
@@ -1398,12 +1096,12 @@ checking for __uint128_t
         }
         
 <==
-[1/2] Compiling [32mbuild/.conf_check_09c7a6a9cd98d9acc4077c863e77c7c3/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_6f7a0fc3429541ebf1af78482c13d95c/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_09c7a6a9cd98d9acc4077c863e77c7c3/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_09c7a6a9cd98d9acc4077c863e77c7c3/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_6f7a0fc3429541ebf1af78482c13d95c/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_6f7a0fc3429541ebf1af78482c13d95c/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_09c7a6a9cd98d9acc4077c863e77c7c3/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_6f7a0fc3429541ebf1af78482c13d95c/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking high precision implementation
@@ -1419,12 +1117,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_588e365f71dd86c580b3d0980637dfe8/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header inttypes.h
@@ -1437,12 +1135,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_ae3874aa1fc90878649f06e598aade2d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_f07afb3caf48bdeddd0318b634811463/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1455,9 +1153,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2dfc57a259d8d360a6c649d63e7efb3c/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_47506a4117fefd2fa2cbbb17f0e70886/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_2dfc57a259d8d360a6c649d63e7efb3c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_47506a4117fefd2fa2cbbb17f0e70886/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: Arquivo ou diretório inexistente
     1 | #include <sys/inttypes.h>
       |          ^~~~~~~~~~~~~~~~
@@ -1484,12 +1182,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_feba20a4561b7216757525e05b52bc9e/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_eade08ec6b69743c244ba1cf9951f01a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_feba20a4561b7216757525e05b52bc9e/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_feba20a4561b7216757525e05b52bc9e/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_eade08ec6b69743c244ba1cf9951f01a/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_eade08ec6b69743c244ba1cf9951f01a/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_feba20a4561b7216757525e05b52bc9e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_eade08ec6b69743c244ba1cf9951f01a/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header sys/stat.h
@@ -1502,12 +1200,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_64a92e6f051e8f3131e7e0a02d728790/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_8a7e7cb81ac0141a6d83497bd0f5e284/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_64a92e6f051e8f3131e7e0a02d728790/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_64a92e6f051e8f3131e7e0a02d728790/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_8a7e7cb81ac0141a6d83497bd0f5e284/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_8a7e7cb81ac0141a6d83497bd0f5e284/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_64a92e6f051e8f3131e7e0a02d728790/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_8a7e7cb81ac0141a6d83497bd0f5e284/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header dirent.h
@@ -1520,12 +1218,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_30c8e49bce9e222b53b4845680b69160/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_319776f7911f450f6cc3785975114e70/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_30c8e49bce9e222b53b4845680b69160/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_30c8e49bce9e222b53b4845680b69160/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_319776f7911f450f6cc3785975114e70/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_319776f7911f450f6cc3785975114e70/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_30c8e49bce9e222b53b4845680b69160/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_319776f7911f450f6cc3785975114e70/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header stdlib.h
@@ -1538,12 +1236,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_f69f27a9fdbfc97ad65c8d374edc35e5/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_4bacd27d17fdef3d0ce89eac549d0228/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f69f27a9fdbfc97ad65c8d374edc35e5/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_f69f27a9fdbfc97ad65c8d374edc35e5/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4bacd27d17fdef3d0ce89eac549d0228/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_4bacd27d17fdef3d0ce89eac549d0228/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f69f27a9fdbfc97ad65c8d374edc35e5/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4bacd27d17fdef3d0ce89eac549d0228/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header signal.h
@@ -1556,12 +1254,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_00f48e96c3db274de8c3e9d6961f28c6/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_623cff4dd22393610a8eed8e4e34c21e/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_00f48e96c3db274de8c3e9d6961f28c6/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_00f48e96c3db274de8c3e9d6961f28c6/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_623cff4dd22393610a8eed8e4e34c21e/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_623cff4dd22393610a8eed8e4e34c21e/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_00f48e96c3db274de8c3e9d6961f28c6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_623cff4dd22393610a8eed8e4e34c21e/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header pthread.h
@@ -1576,12 +1274,12 @@ int main ()
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_65a1f4d7d485916c09814ca3b3f8807b/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_d5b1ae792809690f6670724b0c7f53e8/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_65a1f4d7d485916c09814ca3b3f8807b/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_65a1f4d7d485916c09814ca3b3f8807b/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d5b1ae792809690f6670724b0c7f53e8/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_d5b1ae792809690f6670724b0c7f53e8/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_65a1f4d7d485916c09814ca3b3f8807b/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d5b1ae792809690f6670724b0c7f53e8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header stdint.h
@@ -1594,12 +1292,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_588e365f71dd86c580b3d0980637dfe8/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_INTTYPES_H=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_588e365f71dd86c580b3d0980637dfe8/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_26075fb76f13d218c6fdc5b4a353fd08/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header inttypes.h
@@ -1612,12 +1310,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_ae3874aa1fc90878649f06e598aade2d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_f07afb3caf48bdeddd0318b634811463/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ae3874aa1fc90878649f06e598aade2d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_f07afb3caf48bdeddd0318b634811463/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header sys/inttypes.h
@@ -1630,9 +1328,9 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_2dfc57a259d8d360a6c649d63e7efb3c/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_47506a4117fefd2fa2cbbb17f0e70886/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_2dfc57a259d8d360a6c649d63e7efb3c/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_47506a4117fefd2fa2cbbb17f0e70886/testbuild/test.cpp.1.o']
 err: ../test.cpp:1:10: fatal error: sys/inttypes.h: Arquivo ou diretório inexistente
     1 | #include <sys/inttypes.h>
       |          ^~~~~~~~~~~~~~~~
@@ -1658,12 +1356,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_11f91c3a7a2d767817ec0fb624392e20/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_ec14501131cfc3918c71c41be1fc3408/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_11f91c3a7a2d767817ec0fb624392e20/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_11f91c3a7a2d767817ec0fb624392e20/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-pthread', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE___UINT128_T=1', '-DINT64X64_USE_128=1', '-DHAVE_SYS_TYPES_H=1', '-DHAVE_SYS_STAT_H=1', '-DHAVE_DIRENT_H=1', '-DHAVE_STDLIB_H=1', '-DHAVE_GETENV=1', '-DHAVE_SIGNAL_H=1', '-DHAVE_PTHREAD_H=1', '-DHAVE_STDINT_H=1', '-DHAVE_INTTYPES_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ec14501131cfc3918c71c41be1fc3408/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_ec14501131cfc3918c71c41be1fc3408/testbuild/testprog[0m
 
-['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_11f91c3a7a2d767817ec0fb624392e20/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
+['/usr/bin/g++', '-pthread', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ec14501131cfc3918c71c41be1fc3408/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic', '-lrt']
 yes
 ------------------------------------------------------------------
 Checking for header sys/ioctl.h
@@ -1676,12 +1374,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_3239ca159b8b6a9955027fc3922bba22/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_dad0dc4f9c9ef711ad787e9eb7d38f17/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_3239ca159b8b6a9955027fc3922bba22/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_3239ca159b8b6a9955027fc3922bba22/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_dad0dc4f9c9ef711ad787e9eb7d38f17/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_dad0dc4f9c9ef711ad787e9eb7d38f17/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_3239ca159b8b6a9955027fc3922bba22/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_dad0dc4f9c9ef711ad787e9eb7d38f17/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header net/if.h
@@ -1694,12 +1392,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_00d03eb38f0c23ebc454eb40b02088e6/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_5025ec94845f6a857bf922229da49fbb/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_00d03eb38f0c23ebc454eb40b02088e6/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_00d03eb38f0c23ebc454eb40b02088e6/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_5025ec94845f6a857bf922229da49fbb/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_5025ec94845f6a857bf922229da49fbb/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_00d03eb38f0c23ebc454eb40b02088e6/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_5025ec94845f6a857bf922229da49fbb/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header net/ethernet.h
@@ -1712,12 +1410,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_4bc4f07f39548b719df0b775a71d5ffc/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_5cb16012edeb2111fac5fa89dce90f61/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4bc4f07f39548b719df0b775a71d5ffc/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_4bc4f07f39548b719df0b775a71d5ffc/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_5cb16012edeb2111fac5fa89dce90f61/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_5cb16012edeb2111fac5fa89dce90f61/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_4bc4f07f39548b719df0b775a71d5ffc/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_5cb16012edeb2111fac5fa89dce90f61/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header linux/if_tun.h
@@ -1730,12 +1428,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for header netpacket/packet.h
@@ -1748,22 +1446,21 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_ebae1c3ed536f208ca2f50d33e183e32/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_03003c02b360ace7abea21d1487705d4/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ebae1c3ed536f208ca2f50d33e183e32/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_ebae1c3ed536f208ca2f50d33e183e32/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_03003c02b360ace7abea21d1487705d4/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_03003c02b360ace7abea21d1487705d4/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_ebae1c3ed536f208ca2f50d33e183e32/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_03003c02b360ace7abea21d1487705d4/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for NSC location
 not found
 ------------------------------------------------------------------
-Checking for 'sqlite3'
-['/usr/bin/pkg-config', '--cflags', '--libs', 'sqlite3']
-out: -lsqlite3 
-
-yes
+Checking for program 'pkg-config'
+not found
+find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29/src/stats: Could not find the program ['pkg-config']
 ------------------------------------------------------------------
 Checking for header linux/if_tun.h
 ==>
@@ -1775,12 +1472,12 @@ int main(int argc, char **argv) {
 }
 
 <==
-[1/2] Compiling [32mbuild/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/test.cpp[0m
+[1/2] Compiling [32mbuild/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/test.cpp.1.o']
-[2/2] Linking [33mbuild/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/testprog[0m
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/test.cpp.1.o']
+[2/2] Linking [33mbuild/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/testprog[0m
 
-['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_d6274b0ac977d24f1b1b39e59c70be4d/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
+['/usr/bin/g++', 'test.cpp.1.o', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_7c04a3df97cb4572e7e16da67b5f9079/testbuild/testprog', '-Wl,-Bstatic', '-Wl,-Bdynamic']
 yes
 ------------------------------------------------------------------
 Checking for program 'sudo'
@@ -1788,14 +1485,14 @@ Checking for program 'sudo'
 find program=['sudo'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='SUDO' -> ['/usr/bin/sudo']
 ------------------------------------------------------------------
 Checking for program 'valgrind'
-/usr/bin/valgrind
-find program=['valgrind'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='VALGRIND' -> ['/usr/bin/valgrind']
+not found
+find program=['valgrind'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='VALGRIND' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29: Could not find the program ['valgrind']
 ------------------------------------------------------------------
-Checking for 'gsl'
-['/usr/bin/pkg-config', '--cflags', '--libs', 'gsl']
-out: -lgsl -lgslcblas -lm 
-
-yes
+Checking for program 'pkg-config'
+not found
+find program=['pkg-config'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='PKGCONFIG' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29: Could not find the program ['pkg-config']
 ------------------------------------------------------------------
 python-config
 not found
@@ -1806,38 +1503,39 @@ Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_fac013c0bb139445ff717cc4062b41b4/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_fac013c0bb139445ff717cc4062b41b4/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -fstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_95fe462ab954b7b53917908b28aa8c6b/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_004f1f80588de7b2c37bc28848736a21/test.c[0m
 
-['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.c', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_95fe462ab954b7b53917908b28aa8c6b/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-fstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_004f1f80588de7b2c37bc28848736a21/testbuild/test.c.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_fac013c0bb139445ff717cc4062b41b4/test.cpp[0m
+[1/1] Compiling [32mbuild/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/test.cpp[0m
 
-['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_fac013c0bb139445ff717cc4062b41b4/testbuild/test.cpp.1.o']
+['/usr/bin/g++', '-O0', '-ggdb', '-g3', '-Wall', '-std=c++11', '-fstrict-aliasing', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.cpp', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_71c2160bfd3715d81f3b01314a6c5d1a/testbuild/test.cpp.1.o']
 ok
 ------------------------------------------------------------------
 Checking for compilation flag -Wstrict-aliasing support
 ==>
 int main() { return 0; }
 <==
-[1/1] Compiling [32mbuild/.conf_check_95fe462ab954b7b53917908b28aa8c6b/test.c[0m
+[1/1] Compiling [32mbuild/.conf_check_004f1f80588de7b2c37bc28848736a21/test.c[0m
 
-['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_SQLITE3=1', '-DHAVE_IF_TUN_H=1', '-DHAVE_GSL=1', '../test.c', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_95fe462ab954b7b53917908b28aa8c6b/testbuild/test.c.1.o']
+['/usr/bin/gcc', '-Wstrict-aliasing', '-DNS3_BUILD_PROFILE_DEBUG', '-DNS3_ASSERT_ENABLE', '-DNS3_LOG_ENABLE', '-DHAVE_SYS_IOCTL_H=1', '-DHAVE_IF_NETS_H=1', '-DHAVE_NET_ETHERNET_H=1', '-DHAVE_PACKET_H=1', '-DHAVE_IF_TUN_H=1', '../test.c', '-c', '-o/home/alisson/ns-allinone-3.29/ns-3.29/build/.conf_check_004f1f80588de7b2c37bc28848736a21/testbuild/test.c.1.o']
 ok
 ------------------------------------------------------------------
 Checking for program 'doxygen'
-/usr/bin/doxygen
-find program=['doxygen'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='DOXYGEN' -> ['/usr/bin/doxygen']
+not found
+find program=['doxygen'] paths=['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='DOXYGEN' -> None
+from /home/alisson/ns-allinone-3.29/ns-3.29: Could not find the program ['doxygen']

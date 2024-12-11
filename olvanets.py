@@ -36,7 +36,7 @@ for run in xrange(1,2):
                 for f in knownroutes:
                     for d in workload:
                         for e in algorithm:
-                            os.system('./build/scratch/olvanets/olvanets --run=' + str(run) + ' --tracePath=' + path + ' --scenario=' + a + ' --density=' + b + ' --cellcoverage=' + c + ' --knownroutes=' + f + ' --workload=' + d + ' --algorithm=' + e + ' --clientType=moto')
+                            os.system('./build/scratch/olvanets/olvanets --run=' + str(run) + ' --tracePath=' + path + ' --scenario=' + a + ' --density=' + b + ' --cellcoverage=' + c + ' --knownroutes=' + f + ' --workload=' + d + ' --algorithm=' + e + ' --clientType=any')
 
 #os.system('exit') #sair do modo shell
 

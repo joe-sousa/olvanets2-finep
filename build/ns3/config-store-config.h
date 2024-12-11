@@ -7,6 +7,5 @@
 #define PYTHONARCHDIR "/usr/local/lib/python2.7/site-packages"
 #define HAVE_PYEMBED 1
 /* #undef HAVE_PYEXT */
-#define HAVE_LIBXML2 1
 
 #endif /* W_NS3_CONFIG_STORE_CONFIG_H_WAF */

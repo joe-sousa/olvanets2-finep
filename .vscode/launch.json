@@ -19,7 +19,12 @@
       ],
       "stopAtEntry": false,
       "cwd": ".",
-      "environment": [],
+      "environment": [
+        {
+          "name": "LD_LIBRARY_PATH",
+          "value": "/home/alisson/ns-allinone-3.29/ns-3.29/build/lib"
+        }
+      ],
       "externalConsole": false,
       "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb",
