@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on sáb 25 abr 2020 13:07:08 -03 by Eclipse SUMO GUI Version v1_5_0+0464-744bef2e7c
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="AvenidaPaulista.net.xml"/>
+        <route-files value="urban-medium-corridor-normal.rou.xml"/>
+        <!-- contagem de total de veiculos na via -->
+        <!--<additional-files value="edgeData-urban-high-corridor.xml"/>-->
+        <!-- contagem apenas das motos no corredor -->
+        <!--urban-high-corridor-aggressive.rou.xml-->
+        <!--urban-high-corridor-normal.rou.xml-->
+    </input>    
+    <lateral-resolution value="1.6"/>
+
+</configuration>

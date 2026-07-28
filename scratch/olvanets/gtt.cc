@@ -294,6 +294,13 @@ void printNumberOfReplies(){
 
 void SortAndInitTransferGtt() {
 
+	numberOfNeighbors =
+        auxProvidersDist.empty() ? 0 : auxProvidersDist.size() - 1;
+
+    std::cout << "[VIZINHOS] Providers elegiveis: "
+              << numberOfNeighbors << std::endl;
+
+
 	//printNumberOfReplies();
 	numberOfSurrogates = 0; //zera o número de surrogates por enqto
 	double currentTime = Simulator::Now().GetSeconds ();

@@ -103,6 +103,7 @@ extern std::string scenario; //urban ou highway
 extern std::string density; //low, medium ou high
 extern std::string cellcoverage; //tipo de cobertura das torres celulares 5G
 extern std::string logFile; //arquivo para gerar os logs
+extern std::string experimentTag; //variavel que define o cenario - linha nova
 
 extern std::vector <uint32_t> sizesOfPackets; //serve p, p ex, enviar apenas uma imagem (tam1), enviar duas imagens (tam2) ...
 
@@ -198,6 +199,8 @@ extern Ptr<Socket> mmwReqUncSock; //socket da solicitação em unicast via mmwav
 extern Ptr<Socket> wReqBcSock; //socket da solicitação em broadcast via wave
 extern Ptr<Socket> client_side; //@TODO: na verdade, o cliente possui vários sockets
 extern Ptr<Socket> server_side; //@TODO: na verdade, existem vários sockets de servidor
+
+extern uint32_t numberOfNeighbors; //variavel para contar numero de vizinhos
 
 //Ptr<Node> auxProviders[4]; //array auxiliar para ajudar na ordenação dos providers
 //std::map < uint32_t ,uint32_t>   edgeNodeCPUBusy; //(id do edge node, porcentagem de uso da CPU do edge node)

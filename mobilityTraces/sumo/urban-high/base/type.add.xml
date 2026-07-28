@@ -1,0 +1,4 @@
+<additional>
+    <vType id="carro" reroute="true" departLane="best" departSpeed="random" maxSpeed="16.7" vClass="passenger" width="1.6" latAlignment="nice"/>
+    <vType id="moto" reroute="true" departLane="best" departSpeed="random" maxSpeed="16.7" vClass="motorcycle" guiShape="motorcycle" latAlignment="nice"/>
+</additional>

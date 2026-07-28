@@ -48,6 +48,11 @@
 
 using namespace ns3;
 using namespace mmwave;
+std::set<uint32_t> motorcycleNodes;
+std::string providerIds;
+double clientInitialX = 0.0;
+double clientInitialY = 0.0;
+double clientInitialTime = 0.0;
 
 NS_LOG_COMPONENT_DEFINE ("olvanets");
 
@@ -487,7 +492,7 @@ void GetTempoIni() {
 
 void checkOffloadingSuccess(bool checkInFinish) {
 	//std::string filename = "results/" + scenario + "-" + density + "-w" + std::to_string(workload) + "-" + algorithm + ".tr";
-	std::string filename = "results/" + scenario + "-" + density + "-" + cellcoverage + "-w" + std::to_string(workload) + "-" + algorithm + ".tr";
+	std::string filename = "results/" + scenario + "-" + density + "-" + cellcoverage + "-" + experimentTag  + "-w" + std::to_string(workload) + "-" + algorithm + ".tr";
 	//std::string filename = "results/" + scenario + "-" + density + "-kr" + pknownRoutes + "-w" + std::to_string(workload) +
 	//		"-" + algorithm + ".tr";
 	const char* fname = filename.c_str();
@@ -504,10 +509,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 			//não houve envio do workload pelo cliente
 			std::cout << "[SISTEMA] DNF - Nenhum Offloading Realizado =(" << std::endl; //detectado no fim (DNF)
 			os << "[SISTEMA] DNF - Nenhum Offloading Realizado =(" << std::endl;
-			fprintf(fp,"N;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu\n", offlSuc, (unsigned long) numberOfSurrogates,
+			fprintf(fp,"N;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, (unsigned long) numberOfSurrogates,
 				(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 				variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-				(unsigned long) run);
+				(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
 		}
 		if(idxOfProvidersActionedInClient>0){ //acionou providers p enviar workloads, mas o offloading falhou
 			if((numberOfSurrogates > 0) && (OffloadSuccess < numberOfSurrogates)){
@@ -516,10 +521,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 				os << "[SISTEMA] Offloading FAIL =(" << std::endl;
 				//deu certo;qtd de sucessos;tempo;nsd;p qtos tentou enviar;número de recuperações
 				//não contabilizo o tempo quando existe falha, porque não terminou a execução
-				fprintf(fp,"F;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu\n", offlSuc, (unsigned long) numberOfSurrogates,
+				fprintf(fp,"F;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, (unsigned long) numberOfSurrogates,
 						(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 						variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-						(unsigned long) run);
+						(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
 			}
 		}
 		fclose(fp);
@@ -546,10 +551,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 
 			variation = ((localTime/onlyLocalTime)-1.0)*100.0; //variação em relação ao onlyLocalTime
 
-			fprintf(fp,"N;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu\n", offlSuc, localTime, (unsigned long) numberOfSurrogates,
+			fprintf(fp,"N;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, localTime, (unsigned long) numberOfSurrogates,
 					(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 					variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-					(unsigned long) run);
+					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
 			fclose(fp);
 			exit(0);
 		}
@@ -571,10 +576,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 			variation = ((tempoResultante/onlyLocalTime)-1.0)*100.0; //variação em relação ao onlyLocalTime
 			//imprime no arquivo de resultados
 			//deu certo;qtd de sucessos;tempo;nsd;p qtos tentou enviar, # de recuperações de falhas
-			fprintf(fp,"T;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu\n", offlSuc, tempoResultante,(unsigned long)numberOfSurrogates,
+			fprintf(fp,"T;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, tempoResultante,(unsigned long)numberOfSurrogates,
 					(unsigned long)idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 					variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-					(unsigned long) run);
+					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
 			fclose(fp);
 			exit(0);
 		}
@@ -836,10 +841,31 @@ void serverSide() {
 		//qual interface este provider tem? 5G ou WAVE? Lembrando que o provider só tem 1 interface
 		//Ptr<Node> curNode = providers.Get(idxOfProvidersActionedInServer);
 
+		if(idxOfProvidersActionedInServer == 0)
+    		providerIds.clear();
+
 		Ptr<Node> curNode = providers[idxOfProvidersActionedInServer];
+
+		if (!providerIds.empty())
+    		providerIds += ",";
+
+		providerIds += std::to_string(curNode->GetId());
 
 		std::cout << "[SERVIDOR] Servidor " << idxOfProvidersActionedInServer << " (" << getIPFromServer(curNode) << ") ativo!" << std::endl;
 		os << "[SERVIDOR] Servidor " << idxOfProvidersActionedInServer << " (" << getIPFromServer(curNode) << ") ativo!" << std::endl;
+
+		//Linha nova para imprimir id do server
+		std::cout << "[SERVIDOR] NodeID=" << curNode->GetId()
+			<< " | Provider=" << idxOfProvidersActionedInServer
+			<< " | IP=" << getIPFromServer(curNode)
+			<< " ativo!"
+			<< std::endl;
+
+		os << "[SERVIDOR] NodeID=" << curNode->GetId()
+			<< " | Provider=" << idxOfProvidersActionedInServer
+			<< " | IP=" << getIPFromServer(curNode)
+			<< " ativo!"
+			<< std::endl;
 
 		Ptr<NetDevice> curDevice = curNode->GetDevice(0);
 		TypeId tid1 = curDevice->GetInstanceTypeId();
@@ -888,6 +914,16 @@ void serverListenForRequests(Ptr<Socket> socket) {
 	std::string data = std::string((char*)buff);
 
 	Ptr<Node> curNode = socket->GetNode(); //nó atual deste socket
+
+	//linha nova - descorbrir qual no entra aqui
+	std::cout << "[DEBUG] serverListenForRequests() NodeID="
+          << curNode->GetId()
+          << std::endl;
+
+	os << "[DEBUG] serverListenForRequests() NodeID="
+		  << curNode->GetId()
+		  << std::endl;
+
 	Ipv4Address ipv4To = getIPFromServer(curNode);
 
 	/*std::stringbuf sbuf;
@@ -1033,6 +1069,27 @@ void clientSide() {
 
 		InetSocketAddress end = InetSocketAddress (serverIP, 55555);
 		uint32_t status = client_side->Connect(end);
+
+
+		Ptr<MobilityModel> mobility = clients.Get(0)->GetObject<MobilityModel>();
+		Vector pos = mobility->GetPosition();
+
+		//Pegar posições aqui
+		clientInitialX = pos.x;
+		clientInitialY = pos.y;
+		//clientInitialTime = Simulator::Now().GetSeconds();
+
+		/** 
+		std::cout << "[CLIENTE] Posicao inicial: ("
+          << clientInitialX << ", " << clientInitialY
+          << ") Tempo: " << clientInitialTime
+          << std::endl;
+
+			os << "[CLIENTE] Posicao inicial: ("
+			<< clientInitialX << ", " << clientInitialY
+			<< ") Tempo: " << clientInitialTime
+			<< std::endl;
+		*/
 
 		std::cout << "[CLIENTE] Conectando-se a ==> "<< idxOfProvidersActionedInClient << "(" << serverIP << ")"
 				<<	". Status da conexão ==> "<< status << ". Tempo antes de enviar => "<< Simulator::Now().GetSeconds()
@@ -1277,10 +1334,18 @@ void initializeWave () {
 	wReqBcSock->Bind(port); //Aloca um endpoint para este socket para escutar respostas das solicitações em broadcast
 	wReqBcSock->SetRecvCallback(MakeCallback(&clientRecRepPkt)); //Notifica quando novos dados estão disponíveis, recebe respostas
 
+	
 	//p servidor do carro receber solicitações em broadcast e responder
 	InetSocketAddress local = InetSocketAddress (Ipv4Address::GetAny (), 80); //usado para escutar solicitações do cliente
 	for (uint32_t x = 0; x < c.GetN(); x++) {
 		if (x != clientId) { //que o substituto não seja o próprio cliente
+			/*bool isMotorcycle = motorcycleNodes.count(x) > 0; 
+
+			if (isMotorcycle)
+				continue;
+
+			std::cout << "[SERVER] Carro " << x << " adicionado." << std::endl;
+			*/
 			surrogates.Add(c.Get(x)); //adiciona todos os nós restantes no container de substitutos
 			//@armazenaIndexSurrogates[x] = x; //armazena o índice dos substitutos
 			Ptr<Socket> wSinkServer = Socket::CreateSocket (c.Get (x), tid); //cria socket UDP nos substitutos para escutar solicitações do cliente
@@ -1358,6 +1423,12 @@ void initializeMmWave () {
 	internet.Install (edgeNodes);
 	edgeIpIface = epcHelper->AssignUeIpv4Address (NetDeviceContainer (edgeNetDev));
 
+	//Linha nova - Log de saida do ip do edge
+	std::cout << "[EDGE] IP atribuido ao Edge ==> "
+          << edgeIpIface.GetAddress(0) << std::endl;
+	os << "[EDGE] IP atribuido ao Edge ==> "
+   		  << edgeIpIface.GetAddress(0) << std::endl;
+
 	internet.Install (c); //instala a pilha de internet nos carros -- não pode ser acionado sem ter placa de rede instalada
 	//atribuição de IP na interface 5G do cliente
 	clientIpIface = epcHelper->AssignUeIpv4Address (NetDeviceContainer (clientNetDevMmWave));
@@ -1376,6 +1447,17 @@ void initializeMmWave () {
 		ipEdgeEnb[idEnb] = edgeIpIface.GetAddress (i);
 		//ipEdgeEnb[idEnb] = edgeNode->GetObject<Ipv4>()->GetAddress (1, 0).GetLocal();
 		idEdgeEnb[idEnb] = idEdgeNode;
+
+		//Nova linha - impressao de ip e id do edge
+		std::cout << "[EDGE] EdgeNodeID=" << idEdgeNode
+          << " | eNB=" << idEnb
+          << " | IP=" << ipEdgeEnb[idEnb]
+          << std::endl;
+
+		os << "[EDGE] EdgeNodeID=" << idEdgeNode
+		   << " | eNB=" << idEnb
+		   << " | IP=" << ipEdgeEnb[idEnb]
+		   << std::endl;
 	}
 
 	// Set the default gateway for the o carro cliente
@@ -1402,6 +1484,14 @@ void initializeMmWave () {
 	Ptr<NetDevice> clientNetDevCell = clientNetDevMmWave.Get(0); //interface 5G do cliente
 	mmwReqUncSock->BindToNetDevice (clientNetDevCell); //garante que este socket esteja atrelado à interface 5G do cliente
 	InetSocketAddress remoteEdge = InetSocketAddress (ipEdgeEnb[idTargetEnb], 80);
+
+	//nova linha - client edge
+	std::cout << "[CLIENTE] Remote Edge ==> "
+          << ipEdgeEnb[idTargetEnb] << std::endl;
+
+	os << "[CLIENTE] Remote Edge ==> "
+   		  << ipEdgeEnb[idTargetEnb] << std::endl;
+
 	mmwReqUncSock->Connect (remoteEdge);
 	mmwReqUncSock->Bind(port);
 	mmwReqUncSock->SetRecvCallback (MakeCallback (&clientRecRepPkt));
@@ -1424,30 +1514,46 @@ void idClient(){
 	if(clientType == "moto"){
 		if(scenario == "urban"){
 			if(density == "low"){
-				allowedNumbers = {0, 1, 14, 15, 16, 17, 2, 24, 25, 26, 3, 40, 41, 42, 43}; 
+				//allowedNumbers = {0, 1, 14, 15, 16, 17, 2, 24, 25, 26, 3, 40, 41, 42, 43}; 
+				allowedNumbers = {0,1,3,6,7,11,12,19,20,24,25,29,30,37,38}; //Ids existentes no .rou.xml do sumo no limite de nós < 50 validos
 			} else if (density == "medium"){
-				allowedNumbers = {0, 1, 101, 102, 103, 104, 105, 108, 109, 110, 111, 112, 123, 124, 125, 126, 127,
-   								136, 137, 149, 150, 151, 152, 153, 156, 157, 158, 159, 160, 166, 167, 168, 169, 170,
-    							184, 185, 186, 187, 188, 195, 196, 2, 200, 201, 202, 203, 204, 214, 215, 216, 217,
-    							218, 223, 224, 225, 226, 227, 231, 232, 3, 35, 36, 37, 38, 39, 4, 49, 50, 55, 56, 63,
-    							64, 65, 66, 67, 80, 81, 82, 83, 84};
+				allowedNumbers = {8,99,100,101,102,103,104,105,114,117,127,129,139,142};
+								
+								motorcycleNodes.clear();
+
+								for (auto id : allowedNumbers)
+									motorcycleNodes.insert(id);
 			} else if (density == "high"){
-				allowedNumbers = {0, 1, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151,
-        					174, 175, 176, 177, 178, 179, 18, 180, 181, 182, 183, 19, 2, 20, 200, 201, 202, 203, 204, 205, 206, 207,
-        					208, 209, 21, 213, 214, 215, 216, 217, 218, 219, 22, 220, 221, 222, 23, 234, 235, 236, 237, 238, 239, 24,
-        					240, 241, 242, 243, 25, 26, 27, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 3, 307, 308, 309, 310,
-        					311, 312, 313, 314, 315, 316, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 4, 417, 418, 419, 420, 421,
-        					422, 423, 424, 425, 426, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 5, 528, 529, 530, 531, 532, 533,
-        					534, 535, 536, 537, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 6, 60, 61, 62, 63, 64, 65, 66, 67, 68,
-        					69, 7, 8, 9, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99};
+				allowedNumbers = {33,44,47,49,51,52,54,56,58,60,63,67,70,72,
+								87,93,99,102,103,105,107,111,112,114,116,
+								118,121,124,128,129,133,134,138,139,141,
+								143,148,151,154,159,164,167,173,178,183,
+								184,186,188,190,193,195,196,199,203,204,
+								210,211,219,220,225,226,232,234,240,247,
+								249,253,259,264,274,278,280,284,286,288,
+								290,293,294,297,299,303,304};
 			}
 		}
+		
+		
 		uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
 		randomNumber = allowedNumbers[randomIndex]; // Selecionar o número correspondente no conjunto
 		while(carEnergyLevel[randomNumber] < carMinimalEnergy[randomNumber]){ //roda até achar um cliente que tenha energia suficiente
 			randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1);
 			randomNumber = allowedNumbers[randomIndex];
 		}
+		
+		/*
+		static const uint32_t fixedClients[30] = {
+			98,99,100,101,102,
+			103,104,105,114,117,
+			127,129,129,133,98,
+			99,100,101,102,103,
+			104,105,114,117,127,
+			129,129,133,98,99
+		};
+
+		randomNumber = fixedClients[run - 1];*/
 	} else if (clientType == "any"){
 		if(scenario == "urban"){
 			if(density == "low"){
@@ -1682,23 +1788,23 @@ void configureTimeAndNumberOfNodes() {
 		numberOfNodes = 604;
 	}
 	if(traceFile == "urban-low.tcl"){
-		startTime = 10.0;
-		finishTime = 160.0;
+		startTime = 361.0;
+		finishTime = 901.0;
 		//numberOfNodes = 50; //old
-		numberOfNodes = 51; //old - vehcom
+		numberOfNodes = 39; //old - vehcom
 		//numberOfNodes = 51+10; //thesis - acrescentei 10 estacionados
 	}
 	if(traceFile == "urban-medium.tcl"){
-		startTime = 10.0;
-		finishTime = 160.0;
-		numberOfNodes = 276; //old - vehcom
+		startTime = 0.0;
+		finishTime = 100.0;
+		numberOfNodes = 149; //old - vehcom (57 motos, 116 carros, 6 warmups)
 		//numberOfNodes = 276+30; //thesis - acrescentei 30 estacionados
 	}
 	if(traceFile == "urban-high.tcl"){
-		startTime = 10.0;
-		finishTime = 160.0;
+		startTime =157.0;
+		finishTime = 893.0;
 		//numberOfNodes = 509; //old
-		numberOfNodes = 553; //old - vehcom2020
+		numberOfNodes =307;//old - vehcom2020
 		//numberOfNodes = 602+50; //thesis - acrescentei 50 estacionados
 	}
 }
@@ -1722,6 +1828,7 @@ int main (int argc, char *argv[])
 	//cmd.AddValue ("numberOfCycles", "número de ciclos do abc", numberOfCycles);
 	//cmd.AddValue ("foodSources", "fontes de comida do abc", foodSources);
 	cmd.AddValue ("clientType", "tipo de cliente", clientType);
+	cmd.AddValue("experimentTag", "Identificador do experimento", experimentTag); //nova linha
 	cmd.Parse (argc,argv);
 
 	//pknownRoutes="50";
@@ -1731,7 +1838,7 @@ int main (int argc, char *argv[])
 	traceFile = scenario+"-"+density+".tcl";
 	//logFile = "logs/" + scenario + "-" + density + "-w" + std::to_string(workload)
 	//		+ "-" + algorithm + "-" + std::to_string(run) + ".log";
-	logFile = "logs/" + scenario + "-" + density + "-" + cellcoverage + "-w" + std::to_string(workload)
+	logFile = "logs/" + scenario + "-" + density + "-" + cellcoverage + experimentTag + "-w" + std::to_string(workload)
 			+ "-" + algorithm + "-" + std::to_string(run) + ".log";
 	//logFile = "logs/" + scenario + "-" + density + "-kr" + pknownRoutes + "-w" + std::to_string(workload) + "-" +
 	//		algorithm + "-" + std::to_string(run) + ".log";
@@ -1791,6 +1898,9 @@ int main (int argc, char *argv[])
 	//pega o tempo inicial aleatoriamente segundo seed/run
 	Ptr<UniformRandomVariable> yrv = CreateObject<UniformRandomVariable> ();
 	initAction = yrv->GetInteger(startTime, startTime + 80);
+	std::cout << "[DEBUG] run=" << run
+          << " initAction=" << initAction
+          << std::endl;
 	//initAction = 0;
 	//int initAction2 = 0; //começa sempre em 2s, pq o arquivo de mobilidade já foi cortado
 	//uint32_t initAction = rand() % 80 + startTime; //agenda a execução da ação entre 10 e 90s da simulação

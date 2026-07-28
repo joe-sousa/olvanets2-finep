@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-02-16T15:03:07.597877-03:00 by Eclipse SUMO sumo 1.25.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="AvenidaPaulista.net.xml"/>
+        <route-files value="urban-high-corridor-aggressive.rou.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="tripinfo.xml"/>
+        <statistic-output value="stats.xml"/>
+    </output>
+
+    <processing>
+        <lateral-resolution value="1.6"/>
+    </processing>
+
+</sumoConfiguration>
+-->
+
+<statistics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/statistic_file.xsd">
+    <performance clockBegin="1771264987.61" clockEnd="1771264989.34" clockDuration="1.74" traciDuration="0.00" realTimeFactor="519.59" vehicleUpdatesPerSecond="86694.70" personUpdatesPerSecond="0.00" begin="0.00" end="902.00" duration="902.00"/>
+    <vehicles loaded="515" inserted="515" running="0" waiting="0"/>
+    <teleports total="0" jam="0" yield="0" wrongLane="0"/>
+    <safety collisions="0" emergencyStops="0" emergencyBraking="2"/>
+    <persons loaded="0" running="0" jammed="0"/>
+    <personTeleports total="0" abortWait="0" wrongDest="0"/>
+    <vehicleTripStatistics count="515" routeLength="1708.70" speed="6.35" duration="292.24" waitingTime="116.09" timeLoss="162.95" departDelay="0.90" departDelayWaiting="-1.00" totalTravelTime="150502.00" totalDepartDelay="462.07"/>
+    <pedestrianStatistics number="0" routeLength="0.00" duration="0.00" timeLoss="0.00"/>
+    <rideStatistics number="0"/>
+    <transportStatistics number="0"/>
+</statistics>
+
+
+<!--
+STATISTICS SUMMARY – Urban-High Scenario Validation
+
+PERFORMANCE:
+- Simulation executed in 1.74 seconds of real time.
+- RealTimeFactor ≈ 519 → simulation ran ~519x faster than real time.
+- VehicleUpdatesPerSecond ≈ 866 → computationally stable and efficient execution.
+
+VEHICLE INSERTION:
+- 515 vehicles loaded and successfully inserted.
+- No vehicles left running at the end.
+- No insertion blocking occurred.
+- Confirms full execution without structural lock.
+
+TELEPORTS:
+- Total teleports: 0
+- Jam teleports: 0
+- Yield deadlocks: 0
+- Wrong-lane removals: 0
+- Confirms no artificial vehicle removal.
+- Vehicles that disappeared in GUI completed their routes normally.
+
+SAFETY:
+- Collisions: 0
+- Emergency stops: 0
+- Emergency braking events: 2 (acceptable in dense urban traffic).
+- Scenario is physically consistent.
+
+TRIP STATISTICS (Aggregate):
+- Total trips completed: 515
+- Average route length: 1708.70 m
+- Average speed: 6.35 m/s
+- Average trip duration: 292.24 s
+- Average waiting time: 116.09 s
+- Average time loss: 162.95 s
+- Average departure delay: 0.90 s (negligible)
+
+CONCLUSION:
+- Scenario is structurally stable.
+- No deadlocks, no teleports, no collisions.
+- Suitable for comparative analysis (delay, flow, heatmaps).
+-->

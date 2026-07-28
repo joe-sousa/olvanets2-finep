@@ -59,6 +59,7 @@ uint32_t attempts = 0; //número de tentativas
 uint32_t OffloadSuccess=0;
 uint32_t foodSources; //qtd de soluções ou food sources do algoritmo ABC
 uint32_t numberOfCycles; //número de ciclos do algoritmo ABC
+uint32_t numberOfNeighbors=0; //número de vizinhos do cliente por timestemp
 
 double imgTime;
 double trange; //alcance de transmissão WAVE
@@ -88,6 +89,7 @@ std::string scenario; //urban ou highway
 std::string density; //low, medium ou high
 std::string cellcoverage; //tipo de cobertura das torres celulares 5G
 std::string logFile; //arquivo para gerar os logs
+std::string experimentTag = "default"; // identificador do experimento/cenário - nova linha
 
 std::vector <uint32_t> sizesOfPackets; //serve p, p ex, enviar apenas uma imagem (tam1), enviar duas imagens (tam2) ...
 
