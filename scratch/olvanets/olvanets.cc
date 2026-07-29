@@ -1517,7 +1517,21 @@ void idClient(){
 				//allowedNumbers = {0, 1, 14, 15, 16, 17, 2, 24, 25, 26, 3, 40, 41, 42, 43}; 
 				allowedNumbers = {0,1,3,6,7,11,12,19,20,24,25,29,30,37,38}; //Ids existentes no .rou.xml do sumo no limite de nós < 50 validos
 			} else if (density == "medium"){
-				allowedNumbers = {8,99,100,101,102,103,104,105,114,117,127,129,139,142};
+				allowedNumbers = {7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+								17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+								27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+								37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+								47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
+								57, 58, 59, 60, 61, 62, 63, 64, 65, 66,
+								67, 68, 69, 70, 71, 72, 73, 74, 75, 76,
+								77, 78, 79, 80, 81, 82, 83, 84, 85, 86,
+								87, 88, 89, 90, 91, 92, 93, 94, 95, 96,
+								97, 98, 99, 100, 101, 102, 103, 104, 105, 106,
+								107, 108, 109, 110, 111, 112, 114, 115, 117, 118,
+								119, 120, 121, 122, 123, 124, 125, 126, 127, 129,
+								130, 131, 133, 134, 135, 136, 137, 138, 139, 140,
+								141, 142, 143, 144, 146, 148, 149, 150, 151, 152,
+								153, 154, 155, 156, 157, 158, 160, 161};
 								
 								motorcycleNodes.clear();
 
@@ -1797,7 +1811,7 @@ void configureTimeAndNumberOfNodes() {
 	if(traceFile == "urban-medium.tcl"){
 		startTime = 0.0;
 		finishTime = 100.0;
-		numberOfNodes = 149; //old - vehcom (57 motos, 116 carros, 6 warmups)
+		numberOfNodes = 162; //old - vehcom (57 motos, 116 carros, 6 warmups)
 		//numberOfNodes = 276+30; //thesis - acrescentei 30 estacionados
 	}
 	if(traceFile == "urban-high.tcl"){
