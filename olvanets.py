@@ -29,10 +29,10 @@ knownroutes = ["50"]
 workload = ["1"]
 #algorithm = ["random2", "gtt", "hvc", "gcf", "gcf2"]
 algorithm = ["gtt"]
-EXPERIMENT_TAG = "urban-medium-10moto90car-no-infra-moto-timestemp-finep" 
+EXPERIMENT_TAG = "urban-medium-90moto10car-no-infra-moto-timestemp-finep0208" 
 
 #for run in xrange(1,52):
-for run in range(1,101): #30
+for run in range(1,31): #30
     #if(run==16):
         #continue    
     for a in scenario:
