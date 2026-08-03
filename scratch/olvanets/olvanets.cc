@@ -1518,8 +1518,8 @@ void idClient(){
 				allowedNumbers = {0,1,3,6,7,11,12,19,20,24,25,29,30,37,38}; //Ids existentes no .rou.xml do sumo no limite de nós < 50 validos
 			} else if (density == "medium"){
 				allowedNumbers = {20, 23, 30, 32, 36, 43, 54, 57, 61, 79,
-								83, 84, 101, 103, 110, 111, 112, 117, 118, 120,
-								123, 126, 133, 133, 134, 142, 144, 146, 149, 153};
+							83, 84, 101, 103, 110, 111, 112, 117, 118, 120,
+							123, 126, 133, 133, 134, 142, 144, 146, 149, 153};
 								
 								motorcycleNodes.clear();
 
@@ -1538,24 +1538,21 @@ void idClient(){
 		}
 		
 		
-		uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
+		/*uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
 		randomNumber = allowedNumbers[randomIndex]; // Selecionar o número correspondente no conjunto
 		while(carEnergyLevel[randomNumber] < carMinimalEnergy[randomNumber]){ //roda até achar um cliente que tenha energia suficiente
 			randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1);
 			randomNumber = allowedNumbers[randomIndex];
 		}
-		
-		/*
+		*/
+
 		static const uint32_t fixedClients[30] = {
-			98,99,100,101,102,
-			103,104,105,114,117,
-			127,129,129,133,98,
-			99,100,101,102,103,
-			104,105,114,117,127,
-			129,129,133,98,99
+			20, 23, 30, 32, 36, 43, 54, 57, 61, 79,
+			83, 84, 101, 103, 110, 111, 112, 117, 118, 120,
+			123, 126, 133, 133, 134, 142, 144, 146, 149, 153
 		};
 
-		randomNumber = fixedClients[run - 1];*/
+		randomNumber = fixedClients[run - 1];
 	} else if (clientType == "any"){
 		if(scenario == "urban"){
 			if(density == "low"){
