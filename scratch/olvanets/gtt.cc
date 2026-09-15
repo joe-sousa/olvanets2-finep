@@ -612,6 +612,9 @@ void gttDecision (Ipv4Address ipv4From, uint32_t iface) {
 				Ptr<MobilityModel> model2 = enbNodes.Get(i)->GetObject<MobilityModel>(); //pega o modelo de mobilidade do enb associado
 				double distance = GetDistance(model1,model2);
 				double let = linkEstimatedLifeTime(model1,model2,210.0); // Tempo de vida do enlace; 'let', botei range menor
+				sumLET += let; //acumula para o cálculo da média do enlace na repetição
+				countLET++; //conta quantos valores de LET foram somados
+
 				std::cout << "[CLIENTE] GTT: Servidor ==> "<< ipv4From << ". Tempo de vida do enlace ==> " << let << ". CpuCap ==> " <<
 						edgeNodeCPUCap[idxFromMoreClosestEnb] << " e CpuQueue ==> " << edgeNodeCPUQueue[idxFromMoreClosestEnb] << std::endl;
 				os << "[CLIENTE] GTT: Servidor ==> "<< ipv4From << ". Tempo de vida do enlace ==> " << let << ". CpuCap ==> " <<
@@ -647,6 +650,9 @@ void gttDecision (Ipv4Address ipv4From, uint32_t iface) {
 				Ptr<MobilityModel> model2 = c.Get(i)->GetObject<MobilityModel>();
 				double distance = GetDistance(model1,model2);
 				double let = linkEstimatedLifeTime(model1,model2,240.0); // Tempo de vida do enlace; 'let', botei range menor
+				sumLET += let;
+				countLET++;				
+				
 				std::cout << "[CLIENTE] GTT: Servidor ==> "<< ipv4From << ". Tempo de vida do enlace ==> " << let << ". CpuCap ==> " <<
 						carNodeCPUCap[i] << " e CpuQueue ==> " << carNodeCPUQueue[i] << std::endl;
 				os << "[CLIENTE] GTT: Servidor ==> "<< ipv4From << ". Tempo de vida do enlace ==> " << let << ". CpuCap ==> " <<

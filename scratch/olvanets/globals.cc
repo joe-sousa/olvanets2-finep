@@ -79,6 +79,8 @@ double procDeadline; //time limit/deadline para processar tasks
 double wSumCpuReq=0.0; //soma de cpu required de todas as tasks do workload
 double replyTime = 0.0; //tempo para o servidor responder à solicitação, p evitar concorrência no canal
 double elapsedTime; //para medir o tempo que roda o algoritmo
+double sumLET = 0.0; //soma dos tempos de vida do enlace (LET) calculados durante a repetição
+uint32_t countLET = 0; //quantidade de valores de LET somados nesta repetição
 
 std::string clientType; //tipo de cliente: qualquer um ou apenas moto
 std::string algorithm;

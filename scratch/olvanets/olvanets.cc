@@ -499,6 +499,7 @@ void checkOffloadingSuccess(bool checkInFinish) {
 	fp = fopen(fname, "a+");  //arquivo com resultados
 	char offlSuc[ 4 ]; //apenas transformando uint32_t em char* para o fprintf
 	sprintf(offlSuc,"%u", OffloadSuccess); //apenas transformando uint32_t em char* para o fprintf
+	double avgLET = (countLET > 0) ? (sumLET / countLET) : 0.0; //média do tempo de vida do enlace (LET) calculado nesta repetição
 
 	if(checkInFinish == true){  //para checar apenas no final
 		std::time_t realTime = std::time(nullptr);
@@ -509,10 +510,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 			//não houve envio do workload pelo cliente
 			std::cout << "[SISTEMA] DNF - Nenhum Offloading Realizado =(" << std::endl; //detectado no fim (DNF)
 			os << "[SISTEMA] DNF - Nenhum Offloading Realizado =(" << std::endl;
-			fprintf(fp,"N;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, (unsigned long) numberOfSurrogates,
+			fprintf(fp,"N;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u;%.3f\n", offlSuc, (unsigned long) numberOfSurrogates,
 				(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 				variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-				(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
+				(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors, avgLET);
 		}
 		if(idxOfProvidersActionedInClient>0){ //acionou providers p enviar workloads, mas o offloading falhou
 			if((numberOfSurrogates > 0) && (OffloadSuccess < numberOfSurrogates)){
@@ -521,10 +522,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 				os << "[SISTEMA] Offloading FAIL =(" << std::endl;
 				//deu certo;qtd de sucessos;tempo;nsd;p qtos tentou enviar;número de recuperações
 				//não contabilizo o tempo quando existe falha, porque não terminou a execução
-				fprintf(fp,"F;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, (unsigned long) numberOfSurrogates,
+				fprintf(fp,"F;%s;0.0;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u;%.3f\n", offlSuc, (unsigned long) numberOfSurrogates,
 						(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 						variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-						(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
+						(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors,avgLET);
 			}
 		}
 		fclose(fp);
@@ -551,10 +552,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 
 			variation = ((localTime/onlyLocalTime)-1.0)*100.0; //variação em relação ao onlyLocalTime
 
-			fprintf(fp,"N;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, localTime, (unsigned long) numberOfSurrogates,
+			fprintf(fp,"N;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u;%.3f\n", offlSuc, localTime, (unsigned long) numberOfSurrogates,
 					(unsigned long) idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 					variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
+					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors, avgLET);
 			fclose(fp);
 			exit(0);
 		}
@@ -576,10 +577,10 @@ void checkOffloadingSuccess(bool checkInFinish) {
 			variation = ((tempoResultante/onlyLocalTime)-1.0)*100.0; //variação em relação ao onlyLocalTime
 			//imprime no arquivo de resultados
 			//deu certo;qtd de sucessos;tempo;nsd;p qtos tentou enviar, # de recuperações de falhas
-			fprintf(fp,"T;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u\n", offlSuc, tempoResultante,(unsigned long)numberOfSurrogates,
+			fprintf(fp,"T;%s;%.3f;%lu;%lu;%lu;%.3f;%.3f;%i;%i;%i;%i;%.3f;%i;%lu;%u;%s;%u;%u;%.3f\n", offlSuc, tempoResultante,(unsigned long)numberOfSurrogates,
 					(unsigned long)idxOfProvidersActionedInClient, (unsigned long) numberOfRecoveries, onlyLocalTime,
 					variation, tasksOnlyLocal, tasksOffloadedSuc, tasksRecovered, tasksCounted, elapsedTime, numberOfEnergyViolations,
-					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors);
+					(unsigned long) run, clientId, providerIds.c_str(), initAction, numberOfNeighbors, avgLET);
 			fclose(fp);
 			exit(0);
 		}
@@ -1517,48 +1518,54 @@ void idClient(){
 				//allowedNumbers = {0, 1, 14, 15, 16, 17, 2, 24, 25, 26, 3, 40, 41, 42, 43}; 
 				allowedNumbers = {0,1,3,6,7,11,12,19,20,24,25,29,30,37,38}; //Ids existentes no .rou.xml do sumo no limite de nós < 50 validos
 			} else if (density == "medium"){
-				allowedNumbers = {8, 99, 100, 100, 101,
-							102, 102, 103, 103, 104,
-							104, 104, 104, 105, 105,
-							114, 117, 117, 117, 117,
-							127, 127, 127, 129, 129,
-							129, 139, 139, 139, 142};
+				allowedNumbers = {8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+								22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+								36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+								50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
+								64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+								78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+								92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+								105, 106, 107, 108, 109, 112, 113, 114, 115, 116, 117,
+								118, 119, 120, 121, 122, 123, 125, 126, 128, 129, 130,
+								131, 132, 133, 134, 135, 136, 137, 138, 139, 141, 142,
+								144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 156};
 								
 								motorcycleNodes.clear();
 
 								for (auto id : allowedNumbers)
 									motorcycleNodes.insert(id);
 			} else if (density == "high"){
-				allowedNumbers = {33,44,47,49,51,52,54,56,58,60,63,67,70,72,
-								87,93,99,102,103,105,107,111,112,114,116,
-								118,121,124,128,129,133,134,138,139,141,
-								143,148,151,154,159,164,167,173,178,183,
-								184,186,188,190,193,195,196,199,203,204,
-								210,211,219,220,225,226,232,234,240,247,
-								249,253,259,264,274,278,280,284,286,288,
-								290,293,294,297,299,303,304};
+				allowedNumbers = {8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,
+								28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
+								48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,
+								68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,
+								88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,
+								106,107,108,109,112,113,114,115,116,117,118,119,120,121,122,123,
+								125,126,128,129,130,131,132,133,134,135,136,137,138,139,141,142,
+								144,145,146,147,148,149,150,151,152,153,154,156};
 			}
 		}
 		
 		
-		/*uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
+		uint32_t randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1); // Gerar um índice aleatório
 		randomNumber = allowedNumbers[randomIndex]; // Selecionar o número correspondente no conjunto
 		while(carEnergyLevel[randomNumber] < carMinimalEnergy[randomNumber]){ //roda até achar um cliente que tenha energia suficiente
 			randomIndex = xrv->GetInteger(0, allowedNumbers.size() - 1);
 			randomNumber = allowedNumbers[randomIndex];
 		}
-		*/
+		
 
-		static const uint32_t fixedClients[30] = {
-							8, 99, 100, 100, 101,
-							102, 102, 103, 103, 104,
-							104, 104, 104, 105, 105,
-							114, 117, 117, 117, 117,
-							127, 127, 127, 129, 129,
-							129, 139, 139, 139, 142
+		/*static const uint32_t fixedClients[30] = {
+							94, 139, 17, 84, 67,
+							95, 55, 93, 126, 53,
+							108, 82, 11, 67, 105,
+							76, 54, 59, 73, 25,
+							49, 148, 135, 129, 120,
+							103, 116, 100, 152, 8
 		};
 
-		randomNumber = fixedClients[run - 1];
+		randomNumber = fixedClients[run - 1];*/
+		//randomNumber = 95;
 	} else if (clientType == "any"){
 		if(scenario == "urban"){
 			if(density == "low"){
@@ -1802,7 +1809,7 @@ void configureTimeAndNumberOfNodes() {
 	if(traceFile == "urban-medium.tcl"){
 		startTime = 0.0;
 		finishTime = 100.0;
-		numberOfNodes = 149; //old - vehcom (57 motos, 116 carros, 6 warmups)
+		numberOfNodes = 157; //old - vehcom (57 motos, 116 carros, 6 warmups)
 		//numberOfNodes = 276+30; //thesis - acrescentei 30 estacionados
 	}
 	if(traceFile == "urban-high.tcl"){
@@ -1855,8 +1862,17 @@ int main (int argc, char *argv[])
 		return 0;
 	}
 
+	static const uint32_t rngRuns[30] = {
+    17, 65, 11, 21, 35,
+    76, 15, 67, 1, 10,
+    25, 37, 5, 19, 2,
+    4, 7, 27, 28, 36,
+    38, 9, 20, 6, 3,
+    49, 33, 34, 47, 22	
+	};
+
 	RngSeedManager::SetSeed (1);
-	RngSeedManager::SetRun (run);
+	RngSeedManager::SetRun (rngRuns[run - 1]);
 	//srand(time(NULL)); //faz uso do relógio interno do computador para controlar a escolha da semente (seed)
 
 	readLinesFromFile("inputs/workloads/workload" + std::to_string(workload) +".txt", "workload"); //pega as tarefas do workload

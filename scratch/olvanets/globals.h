@@ -93,6 +93,8 @@ extern double procDeadline; //time limit/deadline para processar tasks
 extern double wSumCpuReq; //soma de cpu required de todas as tasks do workload
 extern double replyTime; //tempo para o servidor responder à solicitação, p evitar concorrência no canal
 extern double elapsedTime; //para medir o tempo que roda o algoritmo
+extern double sumLET; //soma dos tempos de vida do enlace (LET) calculados durante a repetição
+extern uint32_t countLET; //quantidade de valores de LET somados nesta repetição
 
 extern std::string clientType; //tipo de cliente: qualquer um ou apenas moto
 extern std::string algorithm;
