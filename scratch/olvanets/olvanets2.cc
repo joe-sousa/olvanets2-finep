@@ -2307,7 +2307,11 @@ int main(int argc, char *argv[])
 
 	// pega o tempo inicial aleatoriamente segundo seed/run
 	Ptr<UniformRandomVariable> yrv = CreateObject<UniformRandomVariable>();
-	initAction = yrv->GetInteger(startTime, startTime + 80);
+	do
+	{
+		initAction = yrv->GetInteger(startTime, startTime + 80);
+	} while (initAction < 2);
+	// initAction = yrv->GetInteger(startTime, startTime + 80);
 
 	// Configura o instante inicial conforme o modo de execucao
 	/*if (mobilityFile.empty()) {
